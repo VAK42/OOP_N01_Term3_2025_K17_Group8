@@ -1,0 +1,48 @@
+DROP TABLE IF EXISTS export, import, product, report, "user" CASCADE;
+CREATE TABLE "user" (
+    userId SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    role VARCHAR(20) NOT NULL
+);
+CREATE TABLE product (
+    pdId SERIAL PRIMARY KEY,
+    pdName VARCHAR(100) UNIQUE NOT NULL,
+    pdPrice NUMERIC(12,2) NOT NULL,
+    pdType VARCHAR(50) NOT NULL,
+    pdInfo TEXT,
+    pdQuantity INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE import (
+    ipId SERIAL PRIMARY KEY,
+    pdName VARCHAR(100) NOT NULL,
+    pdPrice NUMERIC(12,2) NOT NULL,
+    pdType VARCHAR(50) NOT NULL,
+    pdQuantity INTEGER NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE export (
+    epId SERIAL PRIMARY KEY,
+    pdId INTEGER NOT NULL,
+    pdName VARCHAR(100) NOT NULL,
+    pdType VARCHAR(50) NOT NULL,
+    pdPrice NUMERIC(12,2) NOT NULL,
+    pdQuantity INTEGER NOT NULL,
+    pdTotalPrice NUMERIC(12,2) NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_export_product FOREIGN KEY (pdId) REFERENCES product(pdId) ON DELETE RESTRICT
+);
+CREATE TABLE report (
+    reportId SERIAL PRIMARY KEY,
+    userId INTEGER NOT NULL,
+    rpName VARCHAR(100) NOT NULL,
+    rpInfo TEXT,
+    CONSTRAINT fk_report_user FOREIGN KEY (userId) REFERENCES "user"(userId) ON DELETE CASCADE
+);
+CREATE TABLE token (
+    userid BIGINT NOT NULL REFERENCES "user"(userid) ON DELETE CASCADE,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    date TIMESTAMP NOT NULL,
+    PRIMARY KEY (userid, token)
+);
