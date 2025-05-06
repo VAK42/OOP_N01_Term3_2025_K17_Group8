@@ -17,6 +17,7 @@ public class ConfigLoader {
             properties.load(input);
         } catch (IOException e) {
             logger.error("", e);
+            //Quang đẹp zaii
         }
     }
 
