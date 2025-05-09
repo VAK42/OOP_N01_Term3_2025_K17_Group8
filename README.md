@@ -1,6 +1,7 @@
 # Phần Mềm Quản Lý Kho Cửa Hàng
 
 **Đối Tượng:**
+  
 User: userid, username, password, email, role
   
 Category: categoryid, name
