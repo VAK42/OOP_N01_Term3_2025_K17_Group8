@@ -101,32 +101,57 @@ User-created Custom Reports
 ## **IV - Project Structure**
   
 oop/
+  
 ├── .mvn/wrapper/    # Maven Wrapper
+  
 │ └── maven-wrapper.jar
+  
 │ └── maven-wrapper.properties
+  
 │
+  
 ├── mvnw        # Unix Shell Script To Run Maven
+  
 ├── mvnw.cmd    # Windows Batch Script For Maven
+  
 ├── pom.xml     # Maven Project Configuration
+  
 ├── VAK.sql     # SQL Schema For Database Setup
+  
 ├── README.md   # Project Documentation
+  
 ├── .gitignore  # Ignore Rules
+  
 │
+  
 └── src/main/
+  
   ├── java/
+    
   │  └── controller/    # JavaFX Controllers (UI Logic)
+    
   │  └── dao/           # DAO Classes For DB Operations
+    
   │  └── model/         # Entity Classes (JPA Models)
+    
   │  └── service/       # Business Logic Layer
+    
   │  └── util/          # Utilities
+    
   │  └── view/          # JavaFX UI Initialization
+    
   │  └── Main.java      # Application Entry Point
+    
   │
+    
   └── resources/
-    └── META-INF/
-      └── persistence.xml  # JPA Configuration
-      └── FXML + CSS       # JavaFX UI Layouts
-
+    
+    │── META-INF/
+      
+    │  └── persistence.xml  # JPA Configuration
+        
+    │  FXML + CSS       # JavaFX UI Layouts
+  
 ## **V - Used Technologies**
 
 <img src="https://skillicons.dev/icons?i=java,hibernate,maven,postgres,idea" />
@@ -147,9 +172,12 @@ MVC + DAO/Service Architecture
 2. Set Up The Database (SQL Schema Provided In VAK.sql)
 3. Configure Database Settings In persistence.xml
 4. Open Project In Your IDE (*JetBrains IntelliJ IDEA* Recommended)
-5. Type Command: ".\mvnw.cmd javafx:run" To Run Application
+5. Type Command: *.\mvnw.cmd javafx:run* To Run Application
 
 ## **VII - Team Members**
-*Vu Anh Kiet* - VAK42 (*)
-*Tran Ha Quang* - Babiboyy55
+  
+*Vu Anh Kiet* - VAK42 (*) 
+  
+*Tran Ha Quang* - Babiboyy55 
+  
 *Pham Thi Minh Ngoc* - mcongie
