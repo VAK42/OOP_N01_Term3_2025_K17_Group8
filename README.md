@@ -1,6 +1,11 @@
-# Phần Mềm Quản Lý Kho Cửa Hàng
+# Store Inventory Management Desktop Application
 
-**Đối Tượng:**
+## **I - Title:**
+
+Store Inventory Management Desktop Application
+
+
+## **II - Entities:**
   
 User: userid, username, password, email, role
   
