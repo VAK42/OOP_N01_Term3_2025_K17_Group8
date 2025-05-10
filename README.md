@@ -100,57 +100,35 @@ User-created Custom Reports
 
 ## **IV - Project Structure**
   
+```plaintext
 oop/
-  
-├── .mvn/wrapper/    # Maven Wrapper
-  
-│ └── maven-wrapper.jar
-  
-│ └── maven-wrapper.properties
-  
+
+├── .mvn/wrapper/        # Maven Wrapper
+│   ├── maven-wrapper.jar
+│   └── maven-wrapper.properties
 │
-  
-├── mvnw        # Unix Shell Script To Run Maven
-  
-├── mvnw.cmd    # Windows Batch Script For Maven
-  
-├── pom.xml     # Maven Project Configuration
-  
-├── VAK.sql     # SQL Schema For Database Setup
-  
-├── README.md   # Project Documentation
-  
-├── .gitignore  # Ignore Rules
-  
+├── mvnw                 # Unix Shell Script To Run Maven
+├── mvnw.cmd             # Windows Batch Script For Maven
+├── pom.xml              # Maven Project Configuration
+├── VAK.sql              # SQL Schema For Database Setup
+├── README.md            # Project Documentation
+├── .gitignore           # Ignore Rules
 │
-  
 └── src/main/
-  
-  ├── java/
-    
-  │  └── controller/    # JavaFX Controllers (UI Logic)
-    
-  │  └── dao/           # DAO Classes For DB Operations
-    
-  │  └── model/         # Entity Classes (JPA Models)
-    
-  │  └── service/       # Business Logic Layer
-    
-  │  └── util/          # Utilities
-    
-  │  └── view/          # JavaFX UI Initialization
-    
-  │  └── Main.java      # Application Entry Point
-    
-  │
-    
-  └── resources/
-    
-    │── META-INF/
-      
-    │  └── persistence.xml  # JPA Configuration
-        
-    │  FXML + CSS       # JavaFX UI Layouts
+    ├── java/
+    │   ├── controller/    # JavaFX Controllers (UI Logic)
+    │   ├── dao/           # DAO Classes For DB Operations
+    │   ├── model/         # Entity Classes (JPA Models)
+    │   ├── service/       # Business Logic Layer
+    │   ├── util/          # Utilities
+    │   ├── view/          # JavaFX UI Initialization
+    │   └── Main.java      # Application Entry Point
+    │
+    └── resources/
+        ├── META-INF/
+        │   └── persistence.xml  # JPA Configuration
+        └── FXML/                # JavaFX UI Layouts
+```
   
 ## **V - Used Technologies**
 
