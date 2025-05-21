@@ -303,3 +303,15 @@ MVC + DAO/Service Architecture
     |
    End
 ```
+
+## **IX - Information**
+  
+Includes Product Management Functionality. Ability To Add, Update, And Delete Products (Product). Display A List Of Products With Filtering Options By Category, Price, And Quantity.
+  
+Includes User Management Functionality. Ability To Add, Update, And Delete Users (User).
+  
+Ability To Assign Products To Users When Performing Import Or Export Operations.
+  
+Data Must Be Stored In Binary Files.
+  
+Must Create Classes Related To Product, User, And Import To Read From And Write To One Or More Binary Files.
