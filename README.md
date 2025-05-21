@@ -316,14 +316,7 @@ Data Must Be Stored In Binary Files.
   
 Must Create Classes Related To Product, User, And Import To Read From And Write To One Or More Binary Files.
 
-# Structural Diagram
-## Class Diagram 
-<img src="img/exampleClassDiagram.jpg">
 
-# Behavioural Diagram
-
-## Create a new object
-
-Activity for creating a new Object
-<img src="img/exampleClassDiagram.jpg">
-
+## **X - Class Diagram**
+  
+<img src="img/OOP..png">
