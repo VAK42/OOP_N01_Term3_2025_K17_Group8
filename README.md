@@ -159,3 +159,147 @@ MVC + DAO/Service Architecture
 *Tran Ha Quang* - Babiboyy55 
   
 *Pham Thi Minh Ngoc* - mcongie
+
+## **VIII - Behavioural Diagram - Activity Diagram**
+
+```plaintext
+** Login
+
+(Start)
+    |
+[Enter Login Information]
+    |
+[Check Account]
+    |
+{Valid Account?}
+    |           \
+  [Yes]         [No]
+    |             \
+[Homepage]      [Display Error]
+    |             |
+   End       [Return To Login]
+```
+  
+```plaintext
+** Home
+
+(Start)
+    |
+[Homepage]
+    |
+    |-------[Dashboard]
+    |           |
+    |           |---[View Dashboard Data (Read)]
+    |
+    |-------[Product]
+    |           |
+    |           |---[Add New Product (Create)]
+    |           |---[View Product List (Read)]
+    |           |---[Edit Product (Update)]
+    |           |---[Delete Product (Delete)]
+    |
+    |-------[Import]
+    |           |
+    |           |---[Create Import Record (Create)]
+    |           |---[View Import Records (Read)]
+    |           |---[Update Import Record (Update)]
+    |           |---[Delete Import Record (Delete)]
+    |
+    |-------[Export]
+    |           |
+    |           |---[Create Export Record (Create)]
+    |           |---[View Export Records (Read)]
+    |           |---[Update Export Record (Update)]
+    |           |---[Delete Export Record (Delete)]
+    |
+    |-------[Report]
+    |           |
+    |           |---[Generate Report (Read)]
+    |           |---[View Saved Reports (Read)]
+    |           |---[Customize Report (Update)]
+    |           |---[Delete Report (Delete)]
+    |
+    |-------[User]
+    |           |
+    |           |---[Add New User (Create)]
+    |           |---[View User List (Read)]
+    |           |---[Edit User (Update)]
+    |           |---[Delete User (Delete)]
+    |
+    |-------[Logout]
+    |           |
+    |           |---[Return To User Login]
+    |
+   End
+```
+
+```plaintext
+** Product
+
+(Start)
+    |
+[Homepage]
+    |
+    |-------[Dashboard]
+    |           |
+    |           |---[View Dashboard Data (Read)]
+    |
+    |-------[Product]
+    |           |
+    |           |---[Add New Product (Create)]
+    |           |       |---[Enter Product Details (Name, Price, Description)]
+    |           |       |---[Upload Product Images]
+    |           |       |---[Assign Product Category]
+    |           |       |---[Save New Product]
+    |           |
+    |           |---[View Product List (Read)]
+    |           |       |---[Display Product Table (With Filters/Sorting)]
+    |           |       |---[Search Products]
+    |           |       |---[View Product Details Page]
+    |           |
+    |           |---[Edit Product (Update)]
+    |           |       |---[Select Product To Edit]
+    |           |       |---[Modify Product Details]
+    |           |       |---[Update Product Images]
+    |           |       |---[Change Product Category]
+    |           |       |---[Save Changes]
+    |           |
+    |           |---[Delete Product (Delete)]
+    |           |       |---[Select Product To Delete]
+    |           |       |---[Confirm Deletion]
+    |           |       |---[Remove Product From Database]
+    |
+    |-------[Import]
+    |           |
+    |           |---[Create Import Record (Create)]
+    |           |---[View Import Records (Read)]
+    |           |---[Update Import Record (Update)]
+    |           |---[Delete Import Record (Delete)]
+    |
+    |-------[Export]
+    |           |
+    |           |---[Create Export Record (Create)]
+    |           |---[View Export Records (Read)]
+    |           |---[Update Export Record (Update)]
+    |           |---[Delete Export Record (Delete)]
+    |
+    |-------[Report]
+    |           |
+    |           |---[Generate Report (Read)]
+    |           |---[View Saved Reports (Read)]
+    |           |---[Customize Report (Update)]
+    |           |---[Delete Report (Delete)]
+    |
+    |-------[User]
+    |           |
+    |           |---[Add New User (Create)]
+    |           |---[View User List (Read)]
+    |           |---[Edit User (Update)]
+    |           |---[Delete User (Delete)]
+    |
+    |-------[Logout]
+    |           |
+    |           |---[Return To User Login]
+    |
+   End
+```
