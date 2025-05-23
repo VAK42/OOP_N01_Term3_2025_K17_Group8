@@ -70,8 +70,4 @@ public class ExportEntity {
   public void setDate(LocalDateTime date) {
     this.date = date;
   }
-
-  public void setPdtotalprice(Double pdtotalprice) {
-    
-  }
 }
