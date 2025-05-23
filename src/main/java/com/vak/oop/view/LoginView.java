@@ -22,7 +22,7 @@ public class LoginView {
       logger.error("Loading LoginView FXML Failed!", e);
     }
   }
-
+/// zzz
   public void showLoginView(Stage stage) {
     ViewUtil.showView(stage, loginPane);
   }
