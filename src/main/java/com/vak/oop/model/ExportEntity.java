@@ -72,5 +72,6 @@ public class ExportEntity {
   }
 
   public void setPdtotalprice(Double pdtotalprice) {
+    
   }
 }
