@@ -1,5 +1,4 @@
 
-
 import java.util.UUID;
 
 public class CategoryTest {
@@ -14,16 +13,7 @@ public class CategoryTest {
         System.out.println("Name: " + category.getName());
 
         category.setName("Laptop");
-
         System.out.println("Updated Name: " + category.getName());
 
-        CategoryEntity category2 = new CategoryEntity();
-        category2.setCategoryId(UUID.randomUUID());
-        category2.setName("Phụ kiện");
-
-        System.out.println("Category2 Id: " + category2.getCategoryId());
-        System.out.println("Category2 Name: " + category2.getName());
-
-        System.out.println("=== End TestCategory ===");
     }
 }

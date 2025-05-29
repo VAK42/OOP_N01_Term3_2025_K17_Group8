@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class ProductTest {
+public class ExportTest {
     public static void main(String[] args) {
         UUID categoryId = UUID.randomUUID();
         CategoryEntity category = new CategoryEntity(categoryId, "Electronics");

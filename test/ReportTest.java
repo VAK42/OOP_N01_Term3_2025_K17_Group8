@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class TestReport {
+public class ReportTest {
 
     public static void test() {
         System.out.println("=== TestReport ===");
