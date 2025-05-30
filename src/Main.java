@@ -1,9 +1,16 @@
 public class Main {
-    public static void main(String[] args) {
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
-        }
-    }
+  public static void main(String[] args) {
+    CategoryTest.runTest();
+    System.out.println();
+    ProductTest.runTest();
+    System.out.println();
+    UserTest.runTest();
+    System.out.println();
+    ExportTest.runTest();
+    System.out.println();
+    ImportTest.runTest();
+    System.out.println();
+    ReportTest.runTest();
+    System.out.println();
+  }
 }

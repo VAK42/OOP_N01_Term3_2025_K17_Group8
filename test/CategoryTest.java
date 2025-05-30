@@ -1,19 +1,10 @@
-
 import java.util.UUID;
 
 public class CategoryTest {
-
-    public static void test() {
-        System.out.println("=== TestCategory ===");
-
-        UUID id = UUID.randomUUID();
-        CategoryEntity category = new CategoryEntity(id, "Điện thoại");
-
-        System.out.println("CategoryId: " + category.getCategoryId());
-        System.out.println("Name: " + category.getName());
-
-        category.setName("Laptop");
-        System.out.println("Updated Name: " + category.getName());
-
-    }
+  public static void runTest() {
+    UUID id = UUID.randomUUID();
+    Category category = new Category(id, "Electronics");
+    System.out.println("Category ID: " + category.getCategoryId());
+    System.out.println("Category Name: " + category.getName());
+  }
 }
