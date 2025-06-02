@@ -1,78 +1,133 @@
 import java.time.LocalDateTime;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class ExportTest {
-  public static void runTest() {
-    UUID exportId = UUID.randomUUID();
-    Category category = new Category(UUID.randomUUID(), "Electronics");
-    Product product = new Product(UUID.randomUUID(), "Laptop", 4200.0, category, "MSI Titan 18HX", 10);
-    User user = new User(UUID.randomUUID(), "vak", "password", "vak@gmail.com", "admin");
-    Double price = product.getPdprice();
-    Integer quantity = 2;
-    Double totalPrice = price * quantity;
-    LocalDateTime date = LocalDateTime.now();
-    Export export = new Export(exportId, product, user, price, quantity, totalPrice, date);
-    System.out.println("Export ID: " + export.getEpid());
-    System.out.println("Product Name: " + export.getProduct().getPdname());
-    System.out.println("Product Price: " + export.getProduct().getPdprice());
-    System.out.println("Category: " + export.getProduct().getCategory().getName());
-    System.out.println("User: " + export.getUser().getUsername());
-    System.out.println("Email: " + export.getUser().getEmail());
-    System.out.println("Quantity: " + export.getPdquantity());
-    System.out.println("Total Price: " + export.getPdtotalprice());
-    System.out.println("Date: " + export.getDate());
+  private static final Scanner scanner = new Scanner(System.in);
+  private static final ExportList exportList = new ExportList();
+
+  public static void startMenu() {
+    while (true) {
+      System.out.println("\n=== Export Menu ===");
+      System.out.println("1. Add Export");
+      System.out.println("2. Edit Export");
+      System.out.println("3. Delete Export");
+      System.out.println("4. View All Exports");
+      System.out.println("5. Exit");
+      System.out.print("Enter Choice: ");
+      String choice = scanner.nextLine();
+      switch (choice) {
+        case "1":
+          testAdd();
+          break;
+        case "2":
+          testEdit();
+          break;
+        case "3":
+          testDelete();
+          break;
+        case "4":
+          viewAll();
+          break;
+        case "5":
+          System.out.println("Exiting Menu");
+          return;
+        default:
+          System.out.println("Invalid Choice");
+      }
+    }
   }
 
   public static void testAdd() {
-    ExportList exportList = new ExportList();
-    Category category = new Category(UUID.randomUUID(), "Books");
-    Product product = new Product(UUID.randomUUID(), "Java Book", 50.0, category, "Learn Java", 100);
-    User user = new User(UUID.randomUUID(), "thq", "password", "thq@gmail.com", "user");
-    Double price = product.getPdprice();
-    int quantity = 3;
-    Double total = price * quantity;
-    LocalDateTime date = LocalDateTime.now();
-    Export export = new Export(UUID.randomUUID(), product, user, price, quantity, total, date);
-    exportList.add(export);
-    System.out.println("Export Add: ");
-    for (Export e : exportList.getAll()) {
-      System.out.println("Export ID: " + e.getEpid());
-      System.out.println("Product: " + e.getProduct().getPdname());
+    try {
+      System.out.print("Enter Product Name: ");
+      String pdName = scanner.nextLine();
+      System.out.print("Enter Product Price: ");
+      double pdPrice = Double.parseDouble(scanner.nextLine());
+      System.out.print("Enter Product Description: ");
+      String pdDesc = scanner.nextLine();
+      System.out.print("Enter Product Stock: ");
+      int pdStock = Integer.parseInt(scanner.nextLine());
+      System.out.print("Enter Category Name: ");
+      String catName = scanner.nextLine();
+      System.out.print("Enter Username: ");
+      String username = scanner.nextLine();
+      System.out.print("Enter Password: ");
+      String password = scanner.nextLine();
+      System.out.print("Enter Email: ");
+      String email = scanner.nextLine();
+      System.out.print("Enter Role: ");
+      String role = scanner.nextLine();
+      System.out.print("Enter Quantity: ");
+      int quantity = Integer.parseInt(scanner.nextLine());
+      Category category = new Category(UUID.randomUUID(), catName);
+      Product product = new Product(UUID.randomUUID(), pdName, pdPrice, category, pdDesc, pdStock);
+      User user = new User(UUID.randomUUID(), username, password, email, role);
+      double total = pdPrice * quantity;
+      Export export = new Export(UUID.randomUUID(), product, user, pdPrice, quantity, total, LocalDateTime.now());
+      exportList.add(export);
+      System.out.println("Export Added Successfully");
+    } catch (Exception e) {
+      System.out.println("Error Adding Export: " + e.getMessage());
     }
   }
 
   public static void testEdit() {
-    ExportList exportList = new ExportList();
-    Category category = new Category(UUID.randomUUID(), "Toys");
-    Product product = new Product(UUID.randomUUID(), "Lego", 80.0, category, "Creative Blocks", 50);
-    User user = new User(UUID.randomUUID(), "ptmn", "password", "ptmn@gmail.com", "user");
-    UUID exportId = UUID.randomUUID();
-    Export export = new Export(exportId, product, user, 80.0, 1, 80.0, LocalDateTime.now());
-    exportList.add(export);
-    Product newProduct = new Product(UUID.randomUUID(), "Remote Car", 100.0, category, "RC Car", 30);
-    User newUser = new User(UUID.randomUUID(), "lewandowski", "12345678", "lewy@barca.com", "admin");
-    boolean edited = exportList.edit(exportId, newProduct, newUser, 100.0, 2, 200.0, LocalDateTime.now());
-    System.out.println("Export Edit: " + edited);
-    for (Export e : exportList.getAll()) {
-      System.out.println("Export ID: " + e.getEpid());
-      System.out.println("Product: " + e.getProduct().getPdname());
-      System.out.println("User: " + e.getUser().getUsername());
+    try {
+      System.out.print("Enter Export Id To Edit: ");
+      UUID id = UUID.fromString(scanner.nextLine());
+      System.out.print("Enter New Product Name: ");
+      String pdName = scanner.nextLine();
+      System.out.print("Enter New Product Price: ");
+      double pdPrice = Double.parseDouble(scanner.nextLine());
+      System.out.print("Enter New Product Description: ");
+      String pdDesc = scanner.nextLine();
+      System.out.print("Enter New Product Stock: ");
+      int pdStock = Integer.parseInt(scanner.nextLine());
+      System.out.print("Enter New Username: ");
+      String username = scanner.nextLine();
+      System.out.print("Enter New Password: ");
+      String password = scanner.nextLine();
+      System.out.print("Enter New Email: ");
+      String email = scanner.nextLine();
+      System.out.print("Enter New Role: ");
+      String role = scanner.nextLine();
+      System.out.print("Enter New Quantity: ");
+      int quantity = Integer.parseInt(scanner.nextLine());
+      Product product = new Product(UUID.randomUUID(), pdName, pdPrice, new Category(UUID.randomUUID(), "Updated"),
+          pdDesc, pdStock);
+      User user = new User(UUID.randomUUID(), username, password, email, role);
+      double total = pdPrice * quantity;
+      boolean edited = exportList.edit(id, product, user, pdPrice, quantity, total, LocalDateTime.now());
+      System.out.println(edited ? "Export Edited Successfully" : "Export Not Found");
+    } catch (Exception e) {
+      System.out.println("Error Editing Export: " + e.getMessage());
     }
   }
 
   public static void testDelete() {
-    ExportList exportList = new ExportList();
-    Category category = new Category(UUID.randomUUID(), "Accessories");
-    Product product = new Product(UUID.randomUUID(), "Mouse", 25.0, category, "Wireless Mouse", 100);
-    User user = new User(UUID.randomUUID(), "messi", "87654321", "messi@barca.com", "user");
-    UUID exportId = UUID.randomUUID();
-    Export export = new Export(exportId, product, user, 25.0, 4, 100.0, LocalDateTime.now());
-    exportList.add(export);
-    boolean deleted = exportList.delete(exportId);
-    System.out.println("Export Delete: " + deleted);
+    try {
+      System.out.print("Enter Export Id To Delete: ");
+      UUID id = UUID.fromString(scanner.nextLine());
+      boolean deleted = exportList.delete(id);
+      System.out.println(deleted ? "Export Deleted Successfully" : "Export Not Found");
+    } catch (Exception e) {
+      System.out.println("Error Deleting Export: " + e.getMessage());
+    }
+  }
+
+  public static void viewAll() {
+    System.out.println("\nAll Exports");
     for (Export e : exportList.getAll()) {
-      System.out.println("Export ID: " + e.getEpid());
+      System.out.println("Export Id: " + e.getEpid());
       System.out.println("Product: " + e.getProduct().getPdname());
+      System.out.println("Category: " + e.getProduct().getCategory().getName());
+      System.out.println("User: " + e.getUser().getUsername());
+      System.out.println("Email: " + e.getUser().getEmail());
+      System.out.println("Quantity: " + e.getPdquantity());
+      System.out.println("Total Price: " + e.getPdtotalprice());
+      System.out.println("Date: " + e.getDate());
+      System.out.println("------------");
     }
   }
 }

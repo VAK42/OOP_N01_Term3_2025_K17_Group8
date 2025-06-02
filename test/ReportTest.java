@@ -1,59 +1,114 @@
+import java.util.Scanner;
 import java.util.UUID;
 
 public class ReportTest {
-  public static void runTest() {
-    UUID reportId = UUID.randomUUID();
-    User user = new User(UUID.randomUUID(), "xavi", "pwd", "xavi@barca.com", "manager");
-    Report report = new Report(reportId, user, "Monthly Inventory Report",
-        "Summary Of Stock Levels & Movements For The Month");
-    System.out.println("Report ID: " + report.getReportid());
-    System.out.println("Report Name: " + report.getRpname());
-    System.out.println("Report Info: " + report.getRpinfo());
-    System.out.println("User: " + report.getUser().getUsername());
-    System.out.println("Email: " + report.getUser().getEmail());
-    System.out.println("Role: " + report.getUser().getRole());
-  }
+  private static final Scanner scanner = new Scanner(System.in);
+  private static final ReportList reportList = new ReportList();
 
-  public static void testAdd() {
-    ReportList reportList = new ReportList();
-    User user = new User(UUID.randomUUID(), "flick", "pwd", "flick@barca.com", "admin");
-    Report report = new Report(UUID.randomUUID(), user, "Weekly Sales Report", "Analysis Of Weekly Sales Performance");
-    reportList.add(report);
-    System.out.println("Report Add: ");
-    for (Report r : reportList.getAll()) {
-      System.out.println("Report ID: " + r.getReportid());
-      System.out.println("Name: " + r.getRpname());
+  public static void startMenu() {
+    while (true) {
+      System.out.println("\n=== Report Menu ===");
+      System.out.println("1. Add Report");
+      System.out.println("2. Edit Report");
+      System.out.println("3. Delete Report");
+      System.out.println("4. View All Reports");
+      System.out.println("5. Exit");
+      System.out.print("Enter Choice: ");
+      String choice = scanner.nextLine();
+      switch (choice) {
+        case "1":
+          testAdd();
+          break;
+        case "2":
+          testEdit();
+          break;
+        case "3":
+          testDelete();
+          break;
+        case "4":
+          viewAll();
+          break;
+        case "5":
+          System.out.println("Exiting Menu");
+          return;
+        default:
+          System.out.println("Invalid Choice");
+      }
     }
   }
 
-  public static void testEdit() {
-    ReportList reportList = new ReportList();
-    User originalUser = new User(UUID.randomUUID(), "enrique", "xana", "enrique@barca.com", "staff");
-    Report report = new Report(UUID.randomUUID(), originalUser, "Stock Alert",
-        "Low Stock Warning For Several Products");
-    UUID reportId = report.getReportid();
-    reportList.add(report);
-    User updatedUser = new User(UUID.randomUUID(), "pique", "shakira", "pique@barca.com", "manager");
-    boolean result = reportList.edit(reportId, updatedUser, "Updated Stock Alert", "Updated Info With Restock Details");
-    System.out.println("Report Edit: " + result);
-    for (Report r : reportList.getAll()) {
-      System.out.println("Report ID: " + r.getReportid());
-      System.out.println("Name: " + r.getRpname());
-      System.out.println("User: " + r.getUser().getUsername());
+  private static void testAdd() {
+    try {
+      System.out.print("Enter Report Name: ");
+      String rpName = scanner.nextLine();
+      System.out.print("Enter Report Info: ");
+      String rpInfo = scanner.nextLine();
+      System.out.print("Enter User Username: ");
+      String username = scanner.nextLine();
+      System.out.print("Enter User Password: ");
+      String password = scanner.nextLine();
+      System.out.print("Enter User Email: ");
+      String email = scanner.nextLine();
+      System.out.print("Enter User Role: ");
+      String role = scanner.nextLine();
+      User user = new User(UUID.randomUUID(), username, password, email, role);
+      Report report = new Report(UUID.randomUUID(), user, rpName, rpInfo);
+      reportList.add(report);
+      System.out.println("Report Added Successfully");
+    } catch (Exception e) {
+      System.out.println("Error Adding Report");
     }
   }
 
-  public static void testDelete() {
-    ReportList reportList = new ReportList();
-    User user = new User(UUID.randomUUID(), "david", "villa", "david@barca.com", "analyst");
-    Report report = new Report(UUID.randomUUID(), user, "Daily Report", "Auto-generated Daily Summary");
-    UUID reportId = report.getReportid();
-    reportList.add(report);
-    boolean deleted = reportList.delete(reportId);
-    System.out.println("Report Delete: " + deleted);
+  private static void testEdit() {
+    try {
+      System.out.print("Enter Report Id To Edit: ");
+      UUID reportId = UUID.fromString(scanner.nextLine());
+      System.out.print("Enter New Report Name: ");
+      String newName = scanner.nextLine();
+      System.out.print("Enter New Report Info: ");
+      String newInfo = scanner.nextLine();
+      System.out.print("Enter New User Username: ");
+      String username = scanner.nextLine();
+      System.out.print("Enter New User Password: ");
+      String password = scanner.nextLine();
+      System.out.print("Enter New User Email: ");
+      String email = scanner.nextLine();
+      System.out.print("Enter New User Role: ");
+      String role = scanner.nextLine();
+      User newUser = new User(UUID.randomUUID(), username, password, email, role);
+      boolean edited = reportList.edit(reportId, newUser, newName, newInfo);
+      System.out.println(edited ? "Report Edited Successfully" : "Report Not Found");
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid UUID Format");
+    } catch (Exception e) {
+      System.out.println("Error Editing Report");
+    }
+  }
+
+  private static void testDelete() {
+    try {
+      System.out.print("Enter Report Id To Delete: ");
+      UUID reportId = UUID.fromString(scanner.nextLine());
+      boolean deleted = reportList.delete(reportId);
+      System.out.println(deleted ? "Report Deleted Successfully" : "Report Not Found");
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid UUID Format");
+    } catch (Exception e) {
+      System.out.println("Error Deleting Report");
+    }
+  }
+
+  private static void viewAll() {
+    System.out.println("\nAll Reports:");
     for (Report r : reportList.getAll()) {
-      System.out.println("Report ID: " + r.getReportid());
+      System.out.println("Report Id: " + r.getReportid());
       System.out.println("Name: " + r.getRpname());
+      System.out.println("Info: " + r.getRpinfo());
+      System.out.println("User Username: " + r.getUser().getUsername());
+      System.out.println("User Email: " + r.getUser().getEmail());
+      System.out.println("User Role: " + r.getUser().getRole());
+      System.out.println("------------");
     }
   }
 }
