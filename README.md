@@ -264,3 +264,7 @@ Ability To Assign Products To Users When Performing Import Or Export Operations.
 Data Must Be Stored In Binary Files.
   
 Must Create Classes Related To Product, User, And Import To Read From And Write To One Or More Binary Files.
+  
+## **X - Class Diagram**
+  
+<img src="img/OOP.png">
