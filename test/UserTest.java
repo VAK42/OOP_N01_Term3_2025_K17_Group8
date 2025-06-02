@@ -1,11 +1,9 @@
 import java.util.UUID;
 
 public class UserTest {
-
   public static void runTest() {
     UUID userId = UUID.randomUUID();
-    User user = new User(userId, "alice", "alicePass123", "alice@example.com", "admin");
-
+    User user = new User(userId, "vak", "barcelona", "vak@barca.com", "admin");
     System.out.println("User ID: " + user.getUserId());
     System.out.println("Username: " + user.getUsername());
     System.out.println("Password: " + user.getPassword());
@@ -15,43 +13,40 @@ public class UserTest {
 
   public static void testAdd() {
     UserList userList = new UserList();
-    User user = new User(UUID.randomUUID(), "bob", "bobSecure!", "bob@example.com", "staff");
+    User user = new User(UUID.randomUUID(), "lewy", "12345678", "lewy@barca.com", "staff");
     userList.add(user);
-
-    System.out.println("\n[testAdd] User list after adding:");
+    System.out.println("User Add: ");
     for (User u : userList.getAll()) {
-      System.out.println("User ID: " + u.getUserId() + ", Username: " + u.getUsername());
+      System.out.println("User ID: " + u.getUserId());
+      System.out.println("Username: " + u.getUsername());
     }
   }
 
   public static void testEdit() {
     UserList userList = new UserList();
-    User user = new User(UUID.randomUUID(), "charlie", "charlie123", "charlie@example.com", "viewer");
-
+    User user = new User(UUID.randomUUID(), "pedri", "87654321", "pedri@barca.com", "viewer");
     UUID userId = user.getUserId();
     userList.add(user);
-
-    boolean result = userList.edit(userId, "charlieNew", "newPass456", "charlie.new@example.com", "editor");
-
-    System.out.println("\n[testEdit] Edit result: " + result);
+    boolean result = userList.edit(userId, "gavi", "13572468", "gavi@barca.com", "editor");
+    System.out.println("User Edit: " + result);
     for (User u : userList.getAll()) {
-      System.out.println("User ID: " + u.getUserId() + ", Username: " + u.getUsername() + ", Email: " + u.getEmail() + ", Role: " + u.getRole());
+      System.out.println("User ID: " + u.getUserId());
+      System.out.println("Username: " + u.getUsername());
+      System.out.println("Email: " + u.getEmail());
+      System.out.println("Role: " + u.getRole());
     }
   }
 
   public static void testDelete() {
     UserList userList = new UserList();
-    User user = new User(UUID.randomUUID(), "diana", "dianaPwd!", "diana@example.com", "manager");
-
+    User user = new User(UUID.randomUUID(), "dejong", "24681357", "dejong@barca.com", "manager");
     UUID userId = user.getUserId();
     userList.add(user);
-
     boolean deleted = userList.delete(userId);
-
-    System.out.println("\n[testDelete] Delete result: " + deleted);
-    System.out.println("Remaining users:");
+    System.out.println("User Delete: " + deleted);
     for (User u : userList.getAll()) {
-      System.out.println("User ID: " + u.getUserId() + ", Username: " + u.getUsername());
+      System.out.println("User ID: " + u.getUserId());
+      System.out.println("Username: " + u.getUsername());
     }
   }
 }

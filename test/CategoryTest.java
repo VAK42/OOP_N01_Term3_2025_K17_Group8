@@ -10,10 +10,10 @@ public class CategoryTest {
 
   public static void testAdd() {
     CategoryList categoryList = new CategoryList();
-    Category category = new Category(UUID.randomUUID(), "Books");
-
+    UUID id = UUID.randomUUID();
+    Category category = new Category(id, "Books");
     categoryList.add(category);
-    System.out.println("\n[testAdd] Categories after adding:");
+    System.out.println("Category Add: ");
     for (Category c : categoryList.getAll()) {
       System.out.println(c.getCategoryId() + ": " + c.getName());
     }
@@ -23,11 +23,9 @@ public class CategoryTest {
     CategoryList categoryList = new CategoryList();
     UUID id = UUID.randomUUID();
     Category category = new Category(id, "Music");
-
     categoryList.add(category);
     boolean edited = categoryList.edit(id, "Music & Audio");
-
-    System.out.println("\n[testEdit] Edit result: " + edited);
+    System.out.println("Category Edit: " + edited);
     for (Category c : categoryList.getAll()) {
       System.out.println(c.getCategoryId() + ": " + c.getName());
     }
@@ -37,12 +35,9 @@ public class CategoryTest {
     CategoryList categoryList = new CategoryList();
     UUID id = UUID.randomUUID();
     Category category = new Category(id, "Movies");
-
     categoryList.add(category);
     boolean deleted = categoryList.delete(id);
-
-    System.out.println("\n[testDelete] Delete result: " + deleted);
-    System.out.println("Remaining categories:");
+    System.out.println("Category Delete: " + deleted);
     for (Category c : categoryList.getAll()) {
       System.out.println(c.getCategoryId() + ": " + c.getName());
     }
