@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import review.TestSequence;
+
 public class App {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -12,6 +14,7 @@ public class App {
       System.out.println("4. Test Import");
       System.out.println("5. Test User");
       System.out.println("6. Test Report");
+      System.out.println("7. Test Sequence");
       System.out.println("0. Exit");
       System.out.print("Enter Choice: ");
       choice = scanner.nextInt();
@@ -34,6 +37,8 @@ public class App {
         case 6:
           ReportTest.startMenu();
           break;
+        case 7:
+          TestSequence.test();
         case 0:
           System.out.println("Exiting...");
           break;
