@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Export List</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body class="container mt-5">
+<h1>Export List</h1>
+<a class="btn btn-primary mb-3" href="/exports/new">Add New Export</a>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>User</th>
+    <th>Date</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="exp : ${exports}">
+    <td th:text="${exp.epId}"></td>
+    <td th:text="${exp.product.pdName}"></td>
+    <td th:text="${exp.pdPrice}"></td>
+    <td th:text="${exp.pdQuantity}"></td>
+    <td th:text="${exp.pdTotalPrice}"></td>
+    <td th:text="${exp.user.username}"></td>
+    <td th:text="${#temporals.format(exp.date, 'yyyy-MM-dd HH:mm')}"></td>
+    <td>
+      <a class="btn btn-sm btn-warning" th:href="@{'/exports/edit/' + ${exp.epId}}">Edit</a>
+      <form th:action="@{'/exports/delete/' + ${exp.epId}}" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

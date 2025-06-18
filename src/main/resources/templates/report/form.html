@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${report.reportId == null} ? 'New Report' : 'Edit Report'">Report Form</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body class="container mt-5">
+<h1 th:text="${report.reportId == null} ? 'Create New Report' : 'Edit Report'"></h1>
+
+<form th:action="@{${report.reportId == null} ? '/reports' : '/reports'}" th:object="${report}" method="post">
+  <div class="form-group mb-2">
+    <label>User</label>
+    <select class="form-control" th:field="{user}" required>
+      <option th:each="u : ${users}" th:value="${u}" th:text="${u.username}"></option>
+    </select>
+  </div>
+
+  <div class="form-group mb-2">
+    <label>Report Name</label>
+    <input class="form-control" th:field="{rpName}" required />
+  </div>
+
+  <div class="form-group mb-2">
+    <label>Report Info</label>
+    <textarea class="form-control" th:field="*{rpInfo}" required></textarea>
+  </div>
+
+  <div class="text-danger" th:if="${error}">
+    <p th:text="${error}"></p>
+  </div>
+
+  <button class="btn btn-success">Save</button>
+  <a class="btn btn-secondary" href="/reports">Cancel</a>
+</form>
+</body>
+</html>

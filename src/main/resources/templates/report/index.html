@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Report List</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body class="container mt-5">
+<h1>Report List</h1>
+
+<a class="btn btn-primary mb-3" href="/reports/new">Add New Report</a>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>User</th>
+    <th>Report Name</th>
+    <th>Info</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="r : ${reports}">
+    <td th:text="${r.reportId}"></td>
+    <td th:text="${r.user.username}"></td>
+    <td th:text="${r.rpName}"></td>
+    <td th:text="${r.rpInfo}"></td>
+    <td>
+      <a class="btn btn-sm btn-warning" th:href="@{'/reports/edit/' + ${r.reportId}}">Edit</a>
+      <form th:action="@{'/reports/delete/' + ${r.reportId}}" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<p class="text-danger" th:if="${error}" th:text="${error}"></p>
+
+</body>
+</html>
