@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.userId == null} ? 'New User' : 'Edit User'">User Form</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button, a.button {
+            margin-top: 20px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a.button {
+            background-color: #7f8c8d;
+            margin-left: 10px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${user.userId == null} ? 'Add New User' : 'Edit User'"></h1>
+
+<form th:action="@{${user.userId == null} ? '/users' : '/users/update/' + ${user.userId}}" th:object="${user}" method="post">
+
+    <label for="username">Username:</label>
+    <input type="text" th:field="*{username}" id="username" required />
+
+    <label for="email">Email:</label>
+    <input type="email" th:field="*{email}" id="email" required />
+
+    <label for="password">Password:</label>
+    <input type="password" th:field="*{password}" id="password" required />
+
+    <label for="role">Role:</label>
+    <select th:field="*{role}" id="role" required>
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+    </select>
+
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <button type="submit">Save</button>
+    <a href="/users" class="button">Cancel</a>
+</form>
+
+</body>
+</html>
