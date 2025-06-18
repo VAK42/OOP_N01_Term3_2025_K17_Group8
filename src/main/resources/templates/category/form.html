@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${category.categoryId == null} ? 'New Category' : 'Edit Category'">Category Form</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+          padding: 40px;
+      }
+
+      .form-container {
+          background-color: #fff;
+          padding: 24px 32px;
+          border-radius: 8px;
+          max-width: 400px;
+          margin: auto;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+          text-align: center;
+          margin-bottom: 24px;
+      }
+
+      label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+      }
+
+      input[type="text"] {
+          width: 100%;
+          padding: 8px 10px;
+          margin-bottom: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+
+      .error {
+          color: red;
+          margin-bottom: 16px;
+      }
+
+      .button-group {
+          display: flex;
+          justify-content: space-between;
+      }
+
+      button, a {
+          padding: 10px 16px;
+          border: none;
+          background-color: #007bff;
+          color: white;
+          border-radius: 4px;
+          text-decoration: none;
+          font-size: 14px;
+          cursor: pointer;
+      }
+
+      a {
+          background-color: #6c757d;
+          text-align: center;
+          display: inline-block;
+      }
+
+      button:hover, a:hover {
+          opacity: 0.9;
+      }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h1 th:text="${category.categoryId == null} ? 'Create New Category' : 'Edit Category'"></h1>
+
+  <form th:action="@{${category.categoryId == null} ? '/categories' : '/categories/update/' + ${category.categoryId}}"
+        th:object="${category}" method="post">
+
+    <label for="name">Category Name:</label>
+    <input type="text" th:field="*{name}" id="name" required/>
+
+    <div class="error" th:if="${error}">
+      <p th:text="${error}"></p>
+    </div>
+
+    <div class="button-group">
+      <button type="submit">Save</button>
+      <a href="/categories">Cancel</a>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
