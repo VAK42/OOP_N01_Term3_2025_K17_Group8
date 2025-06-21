@@ -1,10 +1,53 @@
-# Store Inventory Management Application
+# OOP - Store Inventory Management Application
   
 ## **I - Title**
   
 Store Inventory Management Application
-  
-## **II - Database Structure**
+## **II - Introduction**
+OOP is a project developed as part of the Object-Oriented Programming course at Phenikaa University. The project focuses on building a software application using the object-oriented programming paradigm, aiming to solve real-world problems through a clear, maintainable, and extensible architecture.
+
+The application is designed to deliver a user-friendly interface, stable performance, and an optimal user experience.
+
+The project was developed by a team of 3 members under the guidance of Dr. Lệ Thu Nguyễn.
+## **III - Project Goal**
+- The Store Inventory Management Application is designed to provide an efficient, user-friendly, and scalable solution for managing store inventory. The main goals of the project are:
+
+- Simplify Inventory Operations: Streamline the processes of adding, updating, importing, and exporting products to improve management efficiency and reduce human error.
+
+- Centralize Product Management: Provide a centralized platform to manage products, stock movements (import/export), and related records with clarity and transparency.
+
+- Enhance Reporting and Decision-Making: Offer customizable and real-time reporting features to help users analyze inventory trends, track stock levels, and make data-driven decisions.
+
+- User Access Control: Enable secure user management with role-based access to protect sensitive data and prevent unauthorized operations.
+
+- Modular and Scalable Architecture: Built using OOP principles and MVC architecture, the system is designed to be extendable, maintainable, and suitable for future enhancements or integrations.
+## **IV - Team Members**
+- **Vu Anh Kiet** - VAK42
+- **Tran Ha Quang** - Babiboyy55 
+- **Pham Thi Minh Ngocg** - mcongie
+## **V - Technologies Used **
+- Programming Languages: Java, HTML, CSS
+
+- Framework: Spring Boot
+
+- Database: PostgreSQL
+
+## ** VI -  Main Features**
+- Register, login, and logout
+
+- Forgot password and change password
+
+- Add, edit, and delete expense records
+
+- Display list of expenses
+
+- View expense statistics via charts
+
+- View expenses over specific time periods
+
+- Update personal information
+
+## **VII - Database Structure**
   
 ### 1. User
   
@@ -88,7 +131,7 @@ User-created Custom Reports
 | rpinfo     | String | Report Details                  |
   
 ---
-  
+
 ## **III - Project Structure**
   
 ```plaintext
