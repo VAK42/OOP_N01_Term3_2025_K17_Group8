@@ -267,4 +267,4 @@ Must Create Classes Related To Product, User, And Import To Read From And Write 
   
 ## **X - Class Diagram**
   
-<img src="img/img/Screenshot 2025-06-21 112729.png">
+<img src="img/Screenshot 2025-06-21 112729.png">
