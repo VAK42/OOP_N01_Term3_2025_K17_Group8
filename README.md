@@ -335,12 +335,79 @@ _Custom User Reports_
 ---
   
 ## **VIII - Diagrams**  
-- Class Diagram  
-  <img src="img/ERD.png" alt="ERD"/>  
+- Class Diagram
+
+```mermaid
+erDiagram
+    USER {
+        UUID userId PK "Primary Key"
+        VARCHAR username "Unique"
+        VARCHAR password
+        VARCHAR email "Unique"
+        VARCHAR role
+    }
+
+    TOKEN {
+        UUID userId FK "References USER"
+        VARCHAR token PK "Primary Key Part"
+        TIMESTAMP date
+    }
+
+    CATEGORY {
+        UUID categoryId PK
+        VARCHAR name "Unique"
+    }
+
+    PRODUCT {
+        UUID pdId PK
+        VARCHAR pdName "Unique"
+        NUMERIC pdPrice
+        UUID categoryId FK "References CATEGORY"
+        TEXT pdInfo
+        INTEGER pdQuantity
+    }
+
+    IMPORT {
+        UUID ipId PK
+        UUID pdId FK "References PRODUCT"
+        NUMERIC pdPrice
+        INTEGER pdQuantity
+        UUID userId FK "References USER"
+        TIMESTAMP date
+    }
+
+    EXPORT {
+        UUID epId PK
+        UUID pdId FK "References PRODUCT"
+        NUMERIC pdPrice
+        INTEGER pdQuantity
+        NUMERIC pdTotalPrice
+        UUID userId FK "References USER"
+        TIMESTAMP date
+    }
+
+    REPORT {
+        UUID reportId PK
+        UUID userId FK "References USER"
+        VARCHAR rpName
+        TEXT rpInfo
+    }
+
+    %% Relationships
+    USER ||--o{ TOKEN : has
+    USER ||--o{ IMPORT : creates
+    USER ||--o{ EXPORT : creates
+    USER ||--o{ REPORT : writes
+
+    CATEGORY ||--o{ PRODUCT : contains
+    PRODUCT ||--o{ IMPORT : is_imported_in
+    PRODUCT ||--o{ EXPORT : is_exported_in
+```
+  
 - Behavioural Diagram  
   
 ```mermaid
-flowchart TD
+flowchart TB
     Start([Start])
     Start --> Login[Admin Logs In]
     Login --> CheckAdmin{Is Admin?}
@@ -426,72 +493,78 @@ stateDiagram-v2
 
     ViewDashboard --> ManageUsers
     state ManageUsers {
+        direction TB
         [*] --> ViewUserList
         ViewUserList --> CreateUser
-        ViewUserList --> EditUser
-        ViewUserList --> DeleteUser
         CreateUser --> ViewUserList
+        ViewUserList --> EditUser
         EditUser --> ViewUserList
+        ViewUserList --> DeleteUser
         DeleteUser --> ViewUserList
         ViewUserList --> [*]
     }
 
     ViewDashboard --> ManageProducts
     state ManageProducts {
+        direction TB
         [*] --> ViewProductList
         ViewProductList --> CreateProduct
-        ViewProductList --> EditProduct
-        ViewProductList --> DeleteProduct
         CreateProduct --> ViewProductList
+        ViewProductList --> EditProduct
         EditProduct --> ViewProductList
+        ViewProductList --> DeleteProduct
         DeleteProduct --> ViewProductList
         ViewProductList --> [*]
     }
 
     ViewDashboard --> ManageCategories
     state ManageCategories {
+        direction TB
         [*] --> ViewCategoryList
         ViewCategoryList --> CreateCategory
-        ViewCategoryList --> EditCategory
-        ViewCategoryList --> DeleteCategory
         CreateCategory --> ViewCategoryList
+        ViewCategoryList --> EditCategory
         EditCategory --> ViewCategoryList
+        ViewCategoryList --> DeleteCategory
         DeleteCategory --> ViewCategoryList
         ViewCategoryList --> [*]
     }
 
     ViewDashboard --> ManageImports
     state ManageImports {
+        direction TB
         [*] --> ViewImportList
         ViewImportList --> CreateImport
-        ViewImportList --> EditImport
-        ViewImportList --> DeleteImport
         CreateImport --> ViewImportList
+        ViewImportList --> EditImport
         EditImport --> ViewImportList
+        ViewImportList --> DeleteImport
         DeleteImport --> ViewImportList
         ViewImportList --> [*]
     }
 
     ViewDashboard --> ManageExports
     state ManageExports {
+        direction TB
         [*] --> ViewExportList
         ViewExportList --> CreateExport
-        ViewExportList --> EditExport
-        ViewExportList --> DeleteExport
         CreateExport --> ViewExportList
+        ViewExportList --> EditExport
         EditExport --> ViewExportList
+        ViewExportList --> DeleteExport
         DeleteExport --> ViewExportList
         ViewExportList --> [*]
     }
 
     ViewDashboard --> ManageReports
     state ManageReports {
+        direction TB
         [*] --> ViewReportList
         ViewReportList --> CreateReport
-        ViewReportList --> EditReport
-        ViewReportList --> DeleteReport
         CreateReport --> ViewReportList
+        ViewReportList --> EditReport
         EditReport --> ViewReportList
+        ViewReportList --> DeleteReport
         DeleteReport --> ViewReportList
         ViewReportList --> [*]
     }
