@@ -4,38 +4,36 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
-@Entity
-@Table(name = "export")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Export {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "epId", columnDefinition = "UUID DEFAULT gen_random_uuid()")
+  @GeneratedValue(generator = "UUID")
   private UUID epId;
-
-  @ManyToOne
+  @ManyToOne(optional = false)
   @JoinColumn(name = "pdId", nullable = false)
   private Product product;
-
-  @Column(name = "pdPrice", nullable = false)
+  @Column(nullable = false)
   private BigDecimal pdPrice;
-
-  @Column(name = "pdQuantity", nullable = false)
+  @Column(nullable = false)
   private int pdQuantity;
-
-  @Column(name = "pdTotalPrice", insertable = false, updatable = false)
+  @Column(nullable = false)
   private BigDecimal pdTotalPrice;
-
-  @ManyToOne
-  @JoinColumn(name = "userId")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "userId", nullable = false)
   private User user;
+  @Column(nullable = false)
+  private Timestamp date = new Timestamp(System.currentTimeMillis());
 
-  @Column(name = "date", nullable = false)
-  private LocalDateTime date = LocalDateTime.now();
+  @PrePersist
+  @PreUpdate
+  public void calculateTotalPrice() {
+    if (pdPrice != null && pdQuantity > 0) {
+      pdTotalPrice = pdPrice.multiply(BigDecimal.valueOf(pdQuantity));
+    }
+  }
 }

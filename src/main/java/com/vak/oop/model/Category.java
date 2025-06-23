@@ -5,17 +5,14 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "category")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Category {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "categoryId", columnDefinition = "UUID DEFAULT gen_random_uuid()")
+  @GeneratedValue(generator = "UUID")
+  @Column(name = "categoryId", updatable = false, nullable = false)
   private UUID categoryId;
-  @Column(name = "name", nullable = false, unique = true, length = 50)
+  @Column(nullable = false, unique = true, length = 50)
   private String name;
 }

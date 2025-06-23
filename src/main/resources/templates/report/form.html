@@ -1,36 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="${report.reportId == null} ? 'New Report' : 'Edit Report'">Report Form</title>
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VAK</title>
+  <link rel="stylesheet" th:href="@{/VAK.css}">
 </head>
-<body class="container mt-5">
-<h1 th:text="${report.reportId == null} ? 'Create New Report' : 'Edit Report'"></h1>
-
-<form th:action="@{${report.reportId == null} ? '/reports' : '/reports'}" th:object="${report}" method="post">
-  <div class="form-group mb-2">
-    <label>User</label>
-    <select class="form-control" th:field="{user}" required>
-      <option th:each="u : ${users}" th:value="${u}" th:text="${u.username}"></option>
-    </select>
+<body>
+<main th:fragment="content">
+  <h2><span class="mdi--bug-outline"></span></h2>
+  <div class="main-container">
+    <form th:action="@{/reports}" th:object="${report}" method="post" class="form-container">
+      <input type="hidden" th:field="*{reportId}"/>
+      <input type="text" th:field="*{rpName}" placeholder="Title" required class="form-util"/><br/>
+      <textarea th:field="*{rpInfo}" placeholder="Info" required class="form-util"></textarea><br/>
+      <button type="submit" class="taskbar-btn form-btn form-util">Save</button>
+    </form>
+    <a th:href="@{/reports}">Back</a>
   </div>
-
-  <div class="form-group mb-2">
-    <label>Report Name</label>
-    <input class="form-control" th:field="{rpName}" required />
-  </div>
-
-  <div class="form-group mb-2">
-    <label>Report Info</label>
-    <textarea class="form-control" th:field="*{rpInfo}" required></textarea>
-  </div>
-
-  <div class="text-danger" th:if="${error}">
-    <p th:text="${error}"></p>
-  </div>
-
-  <button class="btn btn-success">Save</button>
-  <a class="btn btn-secondary" href="/reports">Cancel</a>
-</form>
+</main>
 </body>
 </html>

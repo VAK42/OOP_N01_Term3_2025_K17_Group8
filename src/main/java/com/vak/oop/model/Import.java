@@ -2,37 +2,28 @@ package com.vak.oop.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
-@Entity
-@Table(name = "import")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Import {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "ipId", columnDefinition = "UUID DEFAULT gen_random_uuid()")
-    private UUID ipId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pdId", nullable = false)
-    private Product product;
-
-    @Column(name = "pdPrice", nullable = false)
-    private BigDecimal pdPrice;
-
-    @Column(name = "pdQuantity", nullable = false)
-    private int pdQuantity;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
-
-    @Column(name = "date", nullable = false)
-    private LocalDateTime date = LocalDateTime.now();
+  @Id
+  @GeneratedValue(generator = "UUID")
+  private UUID ipId;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "pdId", nullable = false)
+  private Product product;
+  @Column(nullable = false)
+  private BigDecimal pdPrice;
+  @Column(nullable = false)
+  private int pdQuantity;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "userId", nullable = false)
+  private User user;
+  @Column(nullable = false)
+  private Timestamp date = new Timestamp(System.currentTimeMillis());
 }

@@ -2,9 +2,10 @@ package com.vak.oop.service;
 
 import com.vak.oop.model.Category;
 import com.vak.oop.repository.CategoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,31 +17,27 @@ public class CategoryService {
     this.repo = repo;
   }
 
-  public List<Category> findAll() {
-    return repo.findAll();
+  public Page<Category> findAll(Pageable pageable) {
+    return repo.findAll(pageable);
+  }
+
+  public Page<Category> search(String keyword, Pageable pageable) {
+    return repo.findByNameContainingIgnoreCase(keyword, pageable);
+  }
+
+  public void save(Category category) {
+    repo.save(category);
   }
 
   public Optional<Category> findById(UUID id) {
     return repo.findById(id);
   }
 
-  public boolean save(Category category) {
-    try {
-      repo.save(category);
-      return true;
-    } catch (Exception e) {
-      System.err.println("Error Saving Category: " + e.getMessage());
-      return false;
-    }
+  public void deleteById(UUID id) {
+    repo.deleteById(id);
   }
 
-  public boolean delete(UUID id) {
-    try {
-      repo.deleteById(id);
-      return true;
-    } catch (Exception e) {
-      System.err.println("Error Deleting Category: " + e.getMessage());
-      return false;
-    }
+  public boolean existsByName(String name) {
+    return repo.existsByNameIgnoreCase(name);
   }
 }

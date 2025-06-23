@@ -2,6 +2,10 @@ package com.vak.oop.controller;
 
 import com.vak.oop.model.Category;
 import com.vak.oop.service.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,45 +15,89 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
-  private final CategoryService categoryService;
+  private final CategoryService service;
 
-  public CategoryController(CategoryService categoryService) {
-    this.categoryService = categoryService;
+  public CategoryController(CategoryService service) {
+    this.service = service;
   }
 
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("categories", categoryService.findAll());
-    return "category/index";
+  public String list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "name") String field, @RequestParam(defaultValue = "asc") String direction, Model model) {
+    try {
+      Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(field).ascending() : Sort.by(field).descending();
+      Pageable pageable = PageRequest.of(page, size, sort);
+      Page<Category> categoryPage = keyword.isBlank() ? service.findAll(pageable) : service.search(keyword, pageable);
+      model.addAttribute("categories", categoryPage.getContent());
+      model.addAttribute("currentPage", page);
+      model.addAttribute("totalPages", categoryPage.getTotalPages());
+      model.addAttribute("keyword", keyword);
+      model.addAttribute("field", field);
+      model.addAttribute("direction", direction);
+      model.addAttribute("reverseSortDir", direction.equals("asc") ? "desc" : "asc");
+      model.addAttribute("view", "category/list");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+    }
+    return "index";
   }
 
   @GetMapping("/new")
-  public String createForm(Model model) {
+  public String showCreateForm(Model model) {
     model.addAttribute("category", new Category());
-    return "category/form";
+    model.addAttribute("view", "category/form");
+    return "index";
   }
 
   @PostMapping
   public String save(@ModelAttribute Category category, Model model) {
-    boolean success = categoryService.save(category);
-    if (!success) {
-      model.addAttribute("error", "Failed To Save Category!");
-      return "category/form";
+    try {
+      boolean isNew = (category.getCategoryId() == null);
+      boolean nameExisted = service.existsByName(category.getName());
+      if (isNew && nameExisted) {
+        model.addAttribute("error", "Sth Went Wrong!");
+        model.addAttribute("category", category);
+        model.addAttribute("view", "category/form");
+        return "index";
+      }
+      if (!isNew) {
+        Category existing = service.findById(category.getCategoryId()).orElseThrow();
+        if (!existing.getName().equalsIgnoreCase(category.getName()) && nameExisted) {
+          model.addAttribute("error", "Sth Went Wrong!");
+          model.addAttribute("category", category);
+          model.addAttribute("view", "category/form");
+          return "index";
+        }
+      }
+      service.save(category);
+      return "redirect:/categories";
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "category/form");
+      return "index";
     }
-    return "redirect:/categories";
   }
 
   @GetMapping("/edit/{id}")
-  public String editForm(@PathVariable UUID id, Model model) {
-    categoryService.findById(id).ifPresentOrElse(cat -> model.addAttribute("category", cat), () -> model.addAttribute("error", "Category Not Found!"));
-    return "category/form";
+  public String showEditForm(@PathVariable UUID id, Model model) {
+    try {
+      model.addAttribute("category", service.findById(id).orElseThrow());
+      model.addAttribute("view", "category/form");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+    }
+    return "index";
   }
 
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public String delete(@PathVariable UUID id, Model model) {
-    boolean success = categoryService.delete(id);
-    if (!success) {
-      model.addAttribute("error", "Failed To Delete Category!");
+    try {
+      service.deleteById(id);
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+      return "index";
     }
     return "redirect:/categories";
   }

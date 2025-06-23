@@ -5,25 +5,18 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "report")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Report {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "reportId", columnDefinition = "UUID DEFAULT gen_random_uuid()")
+  @GeneratedValue(generator = "UUID")
   private UUID reportId;
-
-  @ManyToOne
+  @ManyToOne(optional = false)
   @JoinColumn(name = "userId", nullable = false)
   private User user;
-
-  @Column(name = "rpName", nullable = false, length = 100)
+  @Column(nullable = false, length = 100)
   private String rpName;
-
-  @Column(name = "rpInfo", nullable = false, columnDefinition = "TEXT")
+  @Column(nullable = false, columnDefinition = "TEXT")
   private String rpInfo;
 }

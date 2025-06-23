@@ -3,11 +3,12 @@ package com.vak.oop.controller;
 import com.vak.oop.model.Product;
 import com.vak.oop.service.ProductService;
 import com.vak.oop.service.CategoryService;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/products")
@@ -21,44 +22,90 @@ public class ProductController {
   }
 
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("products", productService.findAll());
-    return "product/index";
+  public String list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "pdName") String field, @RequestParam(defaultValue = "asc") String direction, Model model) {
+    try {
+      Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(field).ascending() : Sort.by(field).descending();
+      Pageable pageable = PageRequest.of(page, size, sort);
+      Page<Product> productPage = keyword.isBlank() ? productService.findAll(pageable) : productService.search(keyword, pageable);
+      model.addAttribute("products", productPage.getContent());
+      model.addAttribute("currentPage", page);
+      model.addAttribute("totalPages", productPage.getTotalPages());
+      model.addAttribute("keyword", keyword);
+      model.addAttribute("field", field);
+      model.addAttribute("direction", direction);
+      model.addAttribute("reverseSortDir", direction.equals("asc") ? "desc" : "asc");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+    }
+    model.addAttribute("view", "product/list");
+    return "index";
   }
 
   @GetMapping("/new")
-  public String createForm(Model model) {
-    model.addAttribute("product", new Product());
-    model.addAttribute("categories", categoryService.findAll());
-    return "product/form";
+  public String showCreateForm(Model model) {
+    try {
+      model.addAttribute("product", new Product());
+      model.addAttribute("categories", categoryService.findAll(Pageable.unpaged()).getContent());
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+    }
+    model.addAttribute("view", "product/form");
+    return "index";
   }
 
   @PostMapping
   public String save(@ModelAttribute Product product, Model model) {
-    boolean success = productService.save(product);
-    if (!success) {
-      model.addAttribute("error", "Failed To Save Product!");
-      model.addAttribute("categories", categoryService.findAll());
-      return "product/form";
+    try {
+      boolean isNew = (product.getPdId() == null);
+      boolean nameExists = productService.existsByPdName(product.getPdName());
+      if (isNew && nameExists) {
+        model.addAttribute("error", "Product name already exists.");
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryService.findAll(PageRequest.of(0, Integer.MAX_VALUE)).getContent());
+        model.addAttribute("view", "product/form");
+        return "index";
+      }
+      if (!isNew) {
+        Product existing = productService.findById(product.getPdId()).orElseThrow();
+        if (!existing.getPdName().equalsIgnoreCase(product.getPdName()) && nameExists) {
+          model.addAttribute("error", "Product name already exists.");
+          model.addAttribute("product", product);
+          model.addAttribute("categories", categoryService.findAll(PageRequest.of(0, Integer.MAX_VALUE)).getContent());
+          model.addAttribute("view", "product/form");
+          return "index";
+        }
+      }
+      productService.save(product);
+      return "redirect:/products";
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("product", product);
+      model.addAttribute("view", "product/form");
+      return "index";
     }
-    return "redirect:/products";
   }
 
   @GetMapping("/edit/{id}")
-  public String editForm(@PathVariable UUID id, Model model) {
-    productService.findById(id).ifPresentOrElse(product -> {
-      model.addAttribute("product", product);
-      model.addAttribute("categories", categoryService.findAll());
-    }, () -> model.addAttribute("error", "Product Not Found!"));
-    return "product/form";
+  public String showEditForm(@PathVariable UUID id, Model model) {
+    try {
+      model.addAttribute("product", productService.findById(id).orElseThrow());
+      model.addAttribute("categories", categoryService.findAll(Pageable.unpaged()).getContent());
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+    }
+    model.addAttribute("view", "product/form");
+    return "index";
   }
 
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public String delete(@PathVariable UUID id, Model model) {
-    boolean success = productService.delete(id);
-    if (!success) {
-      model.addAttribute("error", "Failed To Delete Product!");
+    try {
+      productService.deleteById(id);
+      return "redirect:/products";
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "product/list");
+      return "index";
     }
-    return "redirect:/products";
   }
 }

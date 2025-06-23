@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${export.epId == null} ? 'New Export' : 'Edit Export'"></title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VAK</title>
+  <link rel="stylesheet" th:href="@{/VAK.css}">
 </head>
-<body class="container mt-5">
-<h1 th:text="${export.epId == null} ? 'Create New Export' : 'Edit Export'"></h1>
-<form th:action="@{${export.epId == null} ? '/exports' : '/exports'}" th:object="${export}" method="post">
-    <div class="form-group mb-2">
-        <label>Product</label>
-        <select class="form-control" th:field="*{product}" required>
-            <option th:each="p : ${products}" th:value="${p}" th:text="${p.pdName}"></option>
-        </select>
-    </div>
-    <div class="form-group mb-2">
-        <label>Price</label>
-        <input class="form-control" th:field="*{pdPrice}" required />
-    </div>
-    <div class="form-group mb-2">
-        <label>Quantity</label>
-        <input class="form-control" th:field="*{pdQuantity}" required />
-    </div>
-    <div class="form-group mb-2">
-        <label>User</label>
-        <select class="form-control" th:field="*{user}" required>
-            <option th:each="u : ${users}" th:value="${u}" th:text="${u.username}"></option>
-        </select>
-    </div>
-    <div th:if="${error}" class="text-danger">
-        <p th:text="${error}"></p>
-    </div>
-    <button class="btn btn-success">Save</button>
-    <a class="btn btn-secondary" href="/exports">Cancel</a>
-</form>
+<body>
+<main th:fragment="content">
+  <h2><span class="mdi--database-export-outline"></span></h2>
+  <div class="main-container">
+    <form th:action="@{/exports}" th:object="${export}" method="post" class="form-container">
+      <input type="hidden" th:field="*{epId}"/>
+      <select th:field="*{product}" required class="form-util">
+        <option th:each="p : ${products}" th:value="${p.pdId}" th:text="${p.pdName}">Product</option>
+      </select>
+      <input type="number" th:field="*{pdPrice}" placeholder="Price" step="0.01" required class="form-util"/><br/>
+      <input type="number" th:field="*{pdQuantity}" placeholder="Quantity" required class="form-util"/><br/>
+      <button type="submit" class="taskbar-btn form-btn form-util">Save</button>
+    </form>
+    <a th:href="@{/exports}">Back</a>
+  </div>
+</main>
 </body>
 </html>

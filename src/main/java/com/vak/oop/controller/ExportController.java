@@ -4,6 +4,7 @@ import com.vak.oop.model.Export;
 import com.vak.oop.service.ExportService;
 import com.vak.oop.service.ProductService;
 import com.vak.oop.service.UserService;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,59 +14,85 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/exports")
 public class ExportController {
-  private final ExportService exportService;
+  private final ExportService service;
   private final ProductService productService;
   private final UserService userService;
 
-  public ExportController(ExportService exportService, ProductService productService, UserService userService) {
-    this.exportService = exportService;
+  public ExportController(ExportService service, ProductService productService, UserService userService) {
+    this.service = service;
     this.productService = productService;
     this.userService = userService;
   }
 
   @GetMapping
-  public String list(Model model) {
-    model.addAttribute("exports", exportService.findAll());
-    return "export/index";
+  public String list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "date") String field, @RequestParam(defaultValue = "desc") String direction, Model model) {
+    try {
+      Sort sort = direction.equalsIgnoreCase("asc") ? Sort.by(field).ascending() : Sort.by(field).descending();
+      Pageable pageable = PageRequest.of(page, size, sort);
+      Page<Export> exportPage = keyword.isBlank() ? service.findAll(pageable) : service.search(keyword, pageable);
+      model.addAttribute("exports", exportPage.getContent());
+      model.addAttribute("currentPage", page);
+      model.addAttribute("totalPages", exportPage.getTotalPages());
+      model.addAttribute("keyword", keyword);
+      model.addAttribute("field", field);
+      model.addAttribute("direction", direction);
+      model.addAttribute("reverseSortDir", direction.equals("asc") ? "desc" : "asc");
+      model.addAttribute("view", "export/list");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+    }
+    return "index";
   }
 
   @GetMapping("/new")
-  public String createForm(Model model) {
-    model.addAttribute("export", new Export());
-    model.addAttribute("products", productService.findAll());
-    model.addAttribute("users", userService.findAll());
-    return "export/form";
+  public String showCreateForm(Model model) {
+    try {
+      model.addAttribute("export", new Export());
+      model.addAttribute("products", productService.findAll(Pageable.unpaged()).getContent());
+      model.addAttribute("view", "export/form");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+    }
+    return "index";
   }
 
   @PostMapping
-  public String save(@ModelAttribute Export export, Model model) {
-    boolean success = exportService.save(export);
-    if (!success) {
-      model.addAttribute("error", "Failed to save export");
-      model.addAttribute("products", productService.findAll());
-      model.addAttribute("users", userService.findAll());
-      return "export/form";
+  public String save(@ModelAttribute Export exp, Model model) {
+    try {
+      userService.findByRole("admin", Pageable.unpaged()).stream().findFirst().ifPresent(exp::setUser);
+      service.save(exp);
+      return "redirect:/exports";
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "export/form");
+      return "index";
     }
-    return "redirect:/exports";
   }
 
   @GetMapping("/edit/{id}")
-  public String editForm(@PathVariable UUID id, Model model) {
-    exportService.findById(id).ifPresentOrElse(
-      exp -> model.addAttribute("export", exp),
-      () -> model.addAttribute("error", "Export not found")
-    );
-    model.addAttribute("products", productService.findAll());
-    model.addAttribute("users", userService.findAll());
-    return "export/form";
+  public String showEditForm(@PathVariable UUID id, Model model) {
+    try {
+      model.addAttribute("export", service.findById(id).orElseThrow());
+      model.addAttribute("products", productService.findAll(Pageable.unpaged()).getContent());
+      model.addAttribute("view", "export/form");
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+    }
+    return "index";
   }
 
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public String delete(@PathVariable UUID id, Model model) {
-    boolean success = exportService.delete(id);
-    if (!success) {
-      model.addAttribute("error", "Failed to delete export");
+    try {
+      service.deleteById(id);
+      return "redirect:/exports";
+    } catch (Exception e) {
+      model.addAttribute("error", "Sth Went Wrong!");
+      model.addAttribute("view", "error");
+      return "index";
     }
-    return "redirect:/exports";
   }
 }
