@@ -342,82 +342,159 @@ _Custom User Reports_
 ```mermaid
 flowchart TD
     Start([Start])
+    Start --> Login[Admin Logs In]
+    Login --> CheckAdmin{Is Admin?}
+    CheckAdmin -- Yes --> Dashboard[Go To Dashboard]
+    CheckAdmin -- No --> End([End])
 
-    Start --> Login{User Logs In?}
-    Login -- Yes --> VerifyCredentials[Verify Credentials]
-    VerifyCredentials --> CreateToken[Create Token]
-    CreateToken --> GoToDashboard[Go To Dashboard]
-    Login -- No --> End([End])
+    Dashboard --> ViewDashboard[View Data Visuals]
 
-    GoToDashboard --> ViewProducts[View Product List]
-    GoToDashboard --> ManageCategories[Add/Edit/Delete Category]
-    GoToDashboard --> AddProduct[Add New Product]
-    GoToDashboard --> ImportFlow{Import Product?}
-    GoToDashboard --> ExportFlow{Export Product?}
-    GoToDashboard --> CreateReport[Create Report]
+    ViewDashboard --> UsersFlow[Manage Users]
+    UsersFlow --> UsersList[View User List]
+    UsersList --> AddUser[Create New User]
+    UsersList --> EditUser[Edit Existing User]
+    UsersList --> DeleteUser[Delete User]
+    AddUser --> UsersList
+    EditUser --> UsersList
+    DeleteUser --> UsersList
 
-    ImportFlow -- Yes --> SelectImportProduct[Select Product To Import]
-    SelectImportProduct --> EnterImportDetails[Enter Price & Quantity]
-    EnterImportDetails --> SaveImport[Save Import To Database]
-    SaveImport --> IncreaseStock[Increase Product Stock]
+    ViewDashboard --> ProductsFlow[Manage Products]
+    ProductsFlow --> ProductsList[View Product List]
+    ProductsList --> AddProduct[Create New Product]
+    ProductsList --> EditProduct[Edit Product]
+    ProductsList --> DeleteProduct[Delete Product]
+    AddProduct --> ProductsList
+    EditProduct --> ProductsList
+    DeleteProduct --> ProductsList
 
-    ExportFlow -- Yes --> SelectExportProduct[Select Product To Export]
-    SelectExportProduct --> EnterExportDetails[Enter Price & Quantity]
-    EnterExportDetails --> CheckStock{Enough Stock Available?}
-    CheckStock -- Yes --> SaveExport[Save Export To Database]
-    SaveExport --> DecreaseStock[Decrease Product Stock]
-    CheckStock -- No --> ShowError[Show Error Message]
+    ViewDashboard --> CategoriesFlow[Manage Categories]
+    CategoriesFlow --> CategoriesList[View Category List]
+    CategoriesList --> AddCategory[Create New Category]
+    CategoriesList --> EditCategory[Edit Category]
+    CategoriesList --> DeleteCategory[Delete Category]
+    AddCategory --> CategoriesList
+    EditCategory --> CategoriesList
+    DeleteCategory --> CategoriesList
 
-    CreateReport --> SubmitReport[Submit Report To Database]
+    ViewDashboard --> ImportsFlow[Manage Imports]
+    ImportsFlow --> ImportsList[View Import List]
+    ImportsList --> AddImport[Create New Import]
+    ImportsList --> EditImport[Edit Import Record]
+    ImportsList --> DeleteImport[Delete Import]
+    AddImport --> ImportsList
+    EditImport --> ImportsList
+    DeleteImport --> ImportsList
 
-    subgraph EndPoints
-        ViewProducts --> End
-        ManageCategories --> End
-        AddProduct --> End
-        IncreaseStock --> End
-        DecreaseStock --> End
-        ShowError --> End
-        SubmitReport --> End
-    end
+    ViewDashboard --> ExportsFlow[Manage Exports]
+    ExportsFlow --> ExportsList[View Export List]
+    ExportsList --> AddExport[Create New Export]
+    ExportsList --> EditExport[Edit Export Record]
+    ExportsList --> DeleteExport[Delete Export]
+    AddExport --> ExportsList
+    EditExport --> ExportsList
+    DeleteExport --> ExportsList
+
+    ViewDashboard --> ReportsFlow[Manage Reports]
+    ReportsFlow --> ReportsList[View Report List]
+    ReportsList --> AddReport[Create New Report]
+    ReportsList --> EditReport[Edit Report]
+    ReportsList --> DeleteReport[Delete Report]
+    AddReport --> ReportsList
+    EditReport --> ReportsList
+    DeleteReport --> ReportsList
+
+    ReportsList --> End
+    ExportsList --> End
+    ImportsList --> End
+    CategoriesList --> End
+    ProductsList --> End
+    UsersList --> End
 ```
   
 - Activity Diagram  
   
 ```mermaid
-%% Activity Diagram – Product & User Workflow
 stateDiagram-v2
-    [*] --> Login : User Opens App
+    [*] --> Login : Admin Opens App
 
-    Login --> VerifyCredentials : Enter Username/Password
-    VerifyCredentials --> AuthSuccess : If Credentials Are Valid
-    AuthSuccess --> Dashboard
+    Login --> VerifyAdmin : Enter Credentials
+    VerifyAdmin --> IsAdmin? : Check Role == Admin
+    IsAdmin? --> Dashboard : If Admin
+    IsAdmin? --> [*] : If Not Admin
 
-    Dashboard --> ViewProducts : View Product List
-    Dashboard --> ManageCategories : Add/Edit/Delete Category
-    Dashboard --> AddProduct : Add New Product
-    Dashboard --> ImportProduct
-    Dashboard --> ExportProduct
-    Dashboard --> CreateReport : Submit Report
+    Dashboard --> ViewDashboard : View Data Visuals
 
-    ImportProduct --> SelectProductToImport
-    SelectProductToImport --> EnterImportDetails : Enter Price & Quantity
-    EnterImportDetails --> SaveImport : Save To Database
-    SaveImport --> IncreaseStock : Update Product Quantity
+    ViewDashboard --> ManageUsers
+    state ManageUsers {
+        [*] --> ViewUserList
+        ViewUserList --> CreateUser
+        ViewUserList --> EditUser
+        ViewUserList --> DeleteUser
+        CreateUser --> ViewUserList
+        EditUser --> ViewUserList
+        DeleteUser --> ViewUserList
+        ViewUserList --> [*]
+    }
 
-    ExportProduct --> SelectProductToExport
-    SelectProductToExport --> EnterExportDetails : Enter Price & Quantity
-    EnterExportDetails --> CheckStock : Is Quantity Available?
-    CheckStock --> SaveExport : If Yes
-    SaveExport --> DecreaseStock : Update Product Quantity
-    CheckStock --> ShowError : If No
+    ViewDashboard --> ManageProducts
+    state ManageProducts {
+        [*] --> ViewProductList
+        ViewProductList --> CreateProduct
+        ViewProductList --> EditProduct
+        ViewProductList --> DeleteProduct
+        CreateProduct --> ViewProductList
+        EditProduct --> ViewProductList
+        DeleteProduct --> ViewProductList
+        ViewProductList --> [*]
+    }
 
-    ViewProducts --> [*]
-    ManageCategories --> [*]
-    AddProduct --> [*]
-    IncreaseStock --> [*]
-    DecreaseStock --> [*]
-    ShowError --> [*]
-    CreateReport --> [*]
+    ViewDashboard --> ManageCategories
+    state ManageCategories {
+        [*] --> ViewCategoryList
+        ViewCategoryList --> CreateCategory
+        ViewCategoryList --> EditCategory
+        ViewCategoryList --> DeleteCategory
+        CreateCategory --> ViewCategoryList
+        EditCategory --> ViewCategoryList
+        DeleteCategory --> ViewCategoryList
+        ViewCategoryList --> [*]
+    }
+
+    ViewDashboard --> ManageImports
+    state ManageImports {
+        [*] --> ViewImportList
+        ViewImportList --> CreateImport
+        ViewImportList --> EditImport
+        ViewImportList --> DeleteImport
+        CreateImport --> ViewImportList
+        EditImport --> ViewImportList
+        DeleteImport --> ViewImportList
+        ViewImportList --> [*]
+    }
+
+    ViewDashboard --> ManageExports
+    state ManageExports {
+        [*] --> ViewExportList
+        ViewExportList --> CreateExport
+        ViewExportList --> EditExport
+        ViewExportList --> DeleteExport
+        CreateExport --> ViewExportList
+        EditExport --> ViewExportList
+        DeleteExport --> ViewExportList
+        ViewExportList --> [*]
+    }
+
+    ViewDashboard --> ManageReports
+    state ManageReports {
+        [*] --> ViewReportList
+        ViewReportList --> CreateReport
+        ViewReportList --> EditReport
+        ViewReportList --> DeleteReport
+        CreateReport --> ViewReportList
+        EditReport --> ViewReportList
+        DeleteReport --> ViewReportList
+        ViewReportList --> [*]
+    }
 ```
   
 ---
