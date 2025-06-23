@@ -260,9 +260,8 @@ _Custom User Reports_
 ## **IX - Error Handling & Testing**  
   
 - Try - Catch Blocks For Exception Management  
-- Testing:  
-  + JUnit For Unit Tests  
-  + Mockito For Mocking & Integration  
+- JUnit For Unit Tests  
+- Mockito For Mocking & Integration  
   
 ---
   
