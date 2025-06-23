@@ -261,8 +261,8 @@ _Custom User Reports_
   
 - Try - Catch Blocks For Exception Management  
 - Testing:  
-  - JUnit For Unit Tests  
-  - Mockito For Mocking & Integration  
+  + JUnit For Unit Tests  
+  + Mockito For Mocking & Integration  
   
 ---
   
@@ -275,19 +275,15 @@ _Custom User Reports_
   
 ### Installation  
   
-- Clone The Repository
-  git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
+- Clone The Repository: git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
   
-- Navigate To The Project
-  cd OOP_N01_Term3_2025_K17_Group8  
-    
-- Configure Database In application.properties
+- Navigate To The Project: cd OOP_N01_Term3_2025_K17_Group8  
   
-- Run The Application
-  ./mvnw.cmd spring-boot:run  
-    
-- Test The Application
-  ./mvnw.cmd test  
+- Configure Database In application.properties  
+  
+- Run The Application: ./mvnw.cmd spring-boot:run  
+  
+- Test The Application: ./mvnw.cmd test  
   
 ---
   
