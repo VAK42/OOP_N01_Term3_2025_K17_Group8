@@ -329,3 +329,15 @@ _Custom User Reports_
   
 - Dashboard  
   <img src="img/Dashboard.png" alt="Dashboard"/>  
+- Category  
+  <img src="img/Category.png" alt="Category"/>  
+- Product  
+  <img src="img/Product.png" alt="Product"/>  
+- Import  
+  <img src="img/Import.png" alt="Import"/>  
+- Export  
+  <img src="img/Export.png" alt="Export"/>  
+- Report  
+  <img src="img/Report.png" alt="Report"/>
+- User  
+  <img src="img/User.png" alt="User"/>  
