@@ -393,11 +393,56 @@ _Custom User Reports_
   
 ## **XII - Individual Works**  
   
-*Vu Anh Kiet* - Base Initialization + Database + Dashboard + Category + Product  
-  
-*Tran Ha Quang* - Export + Report  
-  
-*Pham Thi Minh Ngoc* - Import + User  
+<table>
+  <thead>
+    <tr>
+      <th>Team Member</th>
+      <th>Modules Assigned</th>
+      <th>Detailed Responsibilities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Vu Anh Kiet</b></td>
+      <td>
+        Base Initialization<br>
+        Database<br>
+        Dashboard<br>
+        Category<br>
+        Product
+      </td>
+      <td>
+        <b>Base Initialization</b>: Set Up Project Structure & Environment & Configuration Files<br>
+        <b>Database</b>: Design Schema & ERD & Relationships<br>
+        <b>Dashboard</b>: Create Summary Views<br>
+        <b>Category</b>: Implement Category CRUD Operations & Link With Products<br>
+        <b>Product</b>: Develop Full Product CRUD & Search Functionality & Inventory Logic
+      </td>
+    </tr>
+    <tr>
+      <td><b>Tran Ha Quang</b></td>
+      <td>
+        Export<br>
+        Report
+      </td>
+      <td>
+        <b>Export</b>: Register Sales Transactions & Calculate Totals & Reduce Inventory Stock<br>
+        <b>Report</b>: Generate & Display & Export Reports (PDF, Excel)
+      </td>
+    </tr>
+    <tr>
+      <td><b>Pham Thi Minh Ngoc</b></td>
+      <td>
+        Import<br>
+        User
+      </td>
+      <td>
+        <b>Import</b>: Register Product Imports & Update Stock Levels & Maintain Import History<br>
+        <b>User</b>: Manage Authentication & Role Assignments
+      </td>
+    </tr>
+  </tbody>
+</table>
   
 ---
   
