@@ -88,7 +88,7 @@ _Tracks Incoming Inventory_
 ---
   
 ### 6. Export  
-_Tracks Outgoing Inventory (Sales)_
+_Tracks Outgoing Inventory_
   
 | Field        | Type     | Description                                         |
 |--------------|----------|-----------------------------------------------------|
@@ -117,7 +117,7 @@ _Custom User Reports_
 ## **IV - Used Technologies**  
 - **Frontend:** HTML, CSS, Javascript, Thymeleaf  
   <a href="https://github.com/VAK42"><img src="https://skillicons.dev/icons?i=html,css,js,spring" /></a>  
-- **Backend:** Java, Spring Boot, Hibernate ORM
+- **Backend:** Java, Spring Boot, Hibernate ORM  
   <a href="https://github.com/VAK42"><img src="https://skillicons.dev/icons?i=java,spring,hibernate,maven" /></a>  
 - **Database:** PostgreSQL, MySQL  
   <a href="https://github.com/VAK42"><img src="https://skillicons.dev/icons?i=postgres,mysql" /></a>  
@@ -269,27 +269,25 @@ _Custom User Reports_
 ## **X - Instructions**  
   
 ### Requirements  
-- Java 24  
+- JDK 24  
 - PostgreSQL  
 - IntelliJ IDEA  
   
 ### Installation  
   
-```plaintext
-# Clone The Repository  
-git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
+- Clone The Repository  
+  - git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
   
-# Navigate To The Project  
-cd OOP_N01_Term3_2025_K17_Group8  
+- Navigate To The Project  
+  - cd OOP_N01_Term3_2025_K17_Group8  
+    
+- Configure Database In application.properties
   
-# Configure Database In application.properties  
-  
-# Run The Application  
-./mvnw.cmd spring-boot:run  
-  
-# Test The Application  
-./mvnw.cmd test  
-```
+- Run The Application  
+  - ./mvnw.cmd spring-boot:run  
+    
+- Test The Application  
+  - ./mvnw.cmd test  
   
 ---
   
