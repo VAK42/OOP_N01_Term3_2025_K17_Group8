@@ -275,19 +275,19 @@ _Custom User Reports_
   
 ### Installation  
   
-- Clone The Repository  
-  - git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
+- Clone The Repository
+  git clone https://github.com/VAK42/OOP_N01_Term3_2025_K17_Group8.git  
   
-- Navigate To The Project  
-  - cd OOP_N01_Term3_2025_K17_Group8  
+- Navigate To The Project
+  cd OOP_N01_Term3_2025_K17_Group8  
     
 - Configure Database In application.properties
   
-- Run The Application  
-  - ./mvnw.cmd spring-boot:run  
+- Run The Application
+  ./mvnw.cmd spring-boot:run  
     
-- Test The Application  
-  - ./mvnw.cmd test  
+- Test The Application
+  ./mvnw.cmd test  
   
 ---
   
@@ -326,4 +326,6 @@ _Custom User Reports_
 ---
   
 ## XIV - Gallery  
-Coming Soon  
+  
+- Dashboard  
+  <img src="img/Dashboard.png" alt="Dashboard"/>  
