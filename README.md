@@ -416,76 +416,66 @@ flowchart TB
 
     Dashboard --> ViewDashboard[View Data Visuals]
 
-    ViewDashboard --> UsersFlow[Manage Users]
-    UsersFlow --> UsersList[View User List]
+    ViewDashboard --> UsersList[View User List]
     UsersList --> AddUser[Create New User]
-    UsersList --> EditUser[Edit Existing User]
-    UsersList --> DeleteUser[Delete User]
     AddUser --> UsersList
+    UsersList --> EditUser[Edit Existing User]
     EditUser --> UsersList
+    UsersList --> DeleteUser[Delete User]
     DeleteUser --> UsersList
 
-    ViewDashboard --> ProductsFlow[Manage Products]
-    ProductsFlow --> ProductsList[View Product List]
+    UsersList --> ProductsList[View Product List]
     ProductsList --> AddProduct[Create New Product]
-    ProductsList --> EditProduct[Edit Product]
-    ProductsList --> DeleteProduct[Delete Product]
     AddProduct --> ProductsList
+    ProductsList --> EditProduct[Edit Product]
     EditProduct --> ProductsList
+    ProductsList --> DeleteProduct[Delete Product]
     DeleteProduct --> ProductsList
 
-    ViewDashboard --> CategoriesFlow[Manage Categories]
-    CategoriesFlow --> CategoriesList[View Category List]
+    ProductsList --> CategoriesList[View Category List]
     CategoriesList --> AddCategory[Create New Category]
-    CategoriesList --> EditCategory[Edit Category]
-    CategoriesList --> DeleteCategory[Delete Category]
     AddCategory --> CategoriesList
+    CategoriesList --> EditCategory[Edit Category]
     EditCategory --> CategoriesList
+    CategoriesList --> DeleteCategory[Delete Category]
     DeleteCategory --> CategoriesList
 
-    ViewDashboard --> ImportsFlow[Manage Imports]
-    ImportsFlow --> ImportsList[View Import List]
+    CategoriesList --> ImportsList[View Import List]
     ImportsList --> AddImport[Create New Import]
-    ImportsList --> EditImport[Edit Import Record]
-    ImportsList --> DeleteImport[Delete Import]
     AddImport --> ImportsList
+    ImportsList --> EditImport[Edit Import]
     EditImport --> ImportsList
+    ImportsList --> DeleteImport[Delete Import]
     DeleteImport --> ImportsList
 
-    ViewDashboard --> ExportsFlow[Manage Exports]
-    ExportsFlow --> ExportsList[View Export List]
+    ImportsList --> ExportsList[View Export List]
     ExportsList --> AddExport[Create New Export]
-    ExportsList --> EditExport[Edit Export Record]
-    ExportsList --> DeleteExport[Delete Export]
     AddExport --> ExportsList
+    ExportsList --> EditExport[Edit Export]
     EditExport --> ExportsList
+    ExportsList --> DeleteExport[Delete Export]
     DeleteExport --> ExportsList
 
-    ViewDashboard --> ReportsFlow[Manage Reports]
-    ReportsFlow --> ReportsList[View Report List]
+    ExportsList --> ReportsList[View Report List]
     ReportsList --> AddReport[Create New Report]
-    ReportsList --> EditReport[Edit Report]
-    ReportsList --> DeleteReport[Delete Report]
     AddReport --> ReportsList
+    ReportsList --> EditReport[Edit Report]
     EditReport --> ReportsList
+    ReportsList --> DeleteReport[Delete Report]
     DeleteReport --> ReportsList
 
     ReportsList --> End
-    ExportsList --> End
-    ImportsList --> End
-    CategoriesList --> End
-    ProductsList --> End
-    UsersList --> End
 ```
   
 - Activity Diagram  
   
 ```mermaid
 stateDiagram-v2
-    [*] --> Login : Admin Opens App
+    direction TB
 
+    [*] --> Login : Admin Opens App
     Login --> VerifyAdmin : Enter Credentials
-    VerifyAdmin --> IsAdmin? : Check Role == Admin
+    VerifyAdmin --> IsAdmin? : Check If Admin
     IsAdmin? --> Dashboard : If Admin
     IsAdmin? --> [*] : If Not Admin
 
