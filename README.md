@@ -379,6 +379,8 @@ _Custom User Reports_
   
 - Test The Application: ./mvnw.cmd test  
   
+- Access The Application: https://localhost:8080  
+  
 ---
   
 ## **XI - Team Members**  
@@ -403,7 +405,7 @@ _Custom User Reports_
   </thead>
   <tbody>
     <tr>
-      <td><b>Vu Anh Kiet</b></td>
+      <td><b><i>Vu Anh Kiet</i></b></td>
       <td>
         Base Initialization<br>
         Database<br>
@@ -420,7 +422,7 @@ _Custom User Reports_
       </td>
     </tr>
     <tr>
-      <td><b>Tran Ha Quang</b></td>
+      <td><b><i>Tran Ha Quang</i></b></td>
       <td>
         Export<br>
         Report
@@ -431,7 +433,7 @@ _Custom User Reports_
       </td>
     </tr>
     <tr>
-      <td><b>Pham Thi Minh Ngoc</b></td>
+      <td><b><i>Pham Thi Minh Ngoc</i></b></td>
       <td>
         Import<br>
         User
