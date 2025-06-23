@@ -337,8 +337,8 @@ _Custom User Reports_
 ## **VIII - Diagrams**  
 - Class Diagram  
   <img src="img/ERD.png" alt="ERD"/>  
-- Behavioural Diagram
-
+- Behavioural Diagram  
+  
 ```mermaid
 flowchart TD
     Start([Start])
@@ -379,6 +379,45 @@ flowchart TD
         ShowError --> End
         SubmitReport --> End
     end
+```
+  
+- Activity Diagram  
+  
+```mermaid
+%% Activity Diagram – Product & User Workflow
+stateDiagram-v2
+    [*] --> Login : User Opens App
+
+    Login --> VerifyCredentials : Enter Username/Password
+    VerifyCredentials --> AuthSuccess : If Credentials Are Valid
+    AuthSuccess --> Dashboard
+
+    Dashboard --> ViewProducts : View Product List
+    Dashboard --> ManageCategories : Add/Edit/Delete Category
+    Dashboard --> AddProduct : Add New Product
+    Dashboard --> ImportProduct
+    Dashboard --> ExportProduct
+    Dashboard --> CreateReport : Submit Report
+
+    ImportProduct --> SelectProductToImport
+    SelectProductToImport --> EnterImportDetails : Enter Price & Quantity
+    EnterImportDetails --> SaveImport : Save To Database
+    SaveImport --> IncreaseStock : Update Product Quantity
+
+    ExportProduct --> SelectProductToExport
+    SelectProductToExport --> EnterExportDetails : Enter Price & Quantity
+    EnterExportDetails --> CheckStock : Is Quantity Available?
+    CheckStock --> SaveExport : If Yes
+    SaveExport --> DecreaseStock : Update Product Quantity
+    CheckStock --> ShowError : If No
+
+    ViewProducts --> [*]
+    ManageCategories --> [*]
+    AddProduct --> [*]
+    IncreaseStock --> [*]
+    DecreaseStock --> [*]
+    ShowError --> [*]
+    CreateReport --> [*]
 ```
   
 ---
