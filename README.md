@@ -471,8 +471,6 @@ flowchart TB
   
 ```mermaid
 stateDiagram-v2
-    direction TB
-
     [*] --> Login : Admin Opens App
     Login --> VerifyAdmin : Enter Credentials
     VerifyAdmin --> IsAdmin? : Check If Admin
@@ -480,8 +478,8 @@ stateDiagram-v2
     IsAdmin? --> [*] : If Not Admin
 
     Dashboard --> ViewDashboard : View Data Visuals
-
     ViewDashboard --> ManageUsers
+
     state ManageUsers {
         direction TB
         [*] --> ViewUserList
@@ -494,7 +492,8 @@ stateDiagram-v2
         ViewUserList --> [*]
     }
 
-    ViewDashboard --> ManageProducts
+    ManageUsers --> ManageProducts
+
     state ManageProducts {
         direction TB
         [*] --> ViewProductList
@@ -507,7 +506,8 @@ stateDiagram-v2
         ViewProductList --> [*]
     }
 
-    ViewDashboard --> ManageCategories
+    ManageProducts --> ManageCategories
+
     state ManageCategories {
         direction TB
         [*] --> ViewCategoryList
@@ -520,7 +520,8 @@ stateDiagram-v2
         ViewCategoryList --> [*]
     }
 
-    ViewDashboard --> ManageImports
+    ManageCategories --> ManageImports
+
     state ManageImports {
         direction TB
         [*] --> ViewImportList
@@ -533,7 +534,8 @@ stateDiagram-v2
         ViewImportList --> [*]
     }
 
-    ViewDashboard --> ManageExports
+    ManageImports --> ManageExports
+
     state ManageExports {
         direction TB
         [*] --> ViewExportList
@@ -546,7 +548,8 @@ stateDiagram-v2
         ViewExportList --> [*]
     }
 
-    ViewDashboard --> ManageReports
+    ManageExports --> ManageReports
+
     state ManageReports {
         direction TB
         [*] --> ViewReportList
@@ -558,6 +561,8 @@ stateDiagram-v2
         DeleteReport --> ViewReportList
         ViewReportList --> [*]
     }
+
+    ManageReports --> [*]
 ```
   
 ---
