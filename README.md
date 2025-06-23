@@ -223,32 +223,114 @@ _Custom User Reports_
 ## **VII - Models & Functionality**  
   
 ### 1. User  
-- Fields: UserId, Username, Password, Email, Role  
-- Functions: Login, Role Validation, Token Association  
+  
+#### Fields  
+- **UserId**: Unique Identifier For Each User  
+- **Username**: Login Name Chosen By The User  
+- **Password**: Encrypted Password Used For Authentication  
+- **Email**: User's Email Address  
+- **Role**: Defines The User's Permissions  
+  
+#### Functions  
+- **Login**: Authenticates User Credentials And Initiates A Session  
+- **Role Validation**: Checks User Role To Control Access  
+- **Token Association**: Links The User To An Authentication Token  
+- **Register User**: Allows Creation Of New Users With Roles  
+- **Update Profile**: Enables Changes To Personal Info Or Password  
+- **Deactivate Account**: Disables Login Access If Needed  
   
 ### 2. Token  
-- Fields: UserId, Token, Date  
-- Functions: Session Authentication, Expiration  
+  
+#### Fields  
+- **Token**: Unique String Assigned To A Logged-In Session  
+- **UserId**: Links Token To A Specific User  
+- **Date**: Timestamp When The Token Was Issued  
+  
+#### Functions  
+- **Session Authentication**: Verifies Token Validity  
+- **Token Refresh**: Issues A New Token Before Expiration  
+- **Expiration**: Invalidates Token After Inactivity Or Time Limit  
+- **Token Revocation**: Manually Ends A User's Session  
   
 ### 3. Category  
-- Fields: CategoryId, Name  
-- Functions: Add, Update, Delete, List Categories  
+  
+#### Fields  
+- **CategoryId**: Unique Identifier For Each Category  
+- **Name**: Descriptive Name Of The Category  
+  
+#### Functions  
+- **Add Category**: Creates A New Product Category  
+- **Update Category**: Modifies Name Or Status  
+- **Delete Category**: Removes Category  
+- **List Categories**: Retrieves All Categories  
+- **Validate Uniqueness**: Prevents Duplicate Names  
   
 ### 4. Product  
-- Fields: PdId, PdName, PdPrice, CategoryId, PdInfo, PdQuantity  
-- Functions: Add, Edit, Delete, Search Products  
   
-### 5. Import  
-- Fields: IpId, PdId, PdPrice, PdQuantity, UserId, Date  
-- Functions: Register Product Imports, Stock Management  
+#### Fields  
+- **PdId**: Unique Identifier For Each Product  
+- **PdName**: Name Of The Product  
+- **PdPrice**: Unit Price Of The Product  
+- **CategoryId**: Associates Product With A Category  
+- **PdInfo**: Additional Product Description  
+- **PdQuantity**: Current Stock Quantity  
+  
+#### Functions  
+- **Add Product**: Adds A New Product  
+- **Edit Product**: Updates Product Details  
+- **Delete Product**: Removes A Product From Inventory  
+- **Search Products**: Filters By Name, Category, Price  
+- **Adjust Stock**: Updates Quantity Based On Imports/Exports  
+- **Get Product Details**: Displays Full Product Info  
+  
+### 5. Import   
+  
+#### Fields  
+- **IpId**: Unique ID For Each Import Transaction  
+- **PdId**: Product Being Imported  
+- **PdPrice**: Purchase Price Per Unit  
+- **PdQuantity**: Quantity Imported  
+- **UserId**: User Who Registered The Import  
+- **Date**: Date And Time Of Import  
+  
+#### Functions  
+- **Register Import**: Logs Import Details & Updates Stock  
+- **Stock Management**: Increases Inventory Count  
+- **View Import History**: Lists Past Imports  
+- **Cost Analysis**: Tracks Price Variations  
   
 ### 6. Export  
-- Fields: EpId, PdId, PdPrice, PdQuantity, PdTotalPrice, UserId, Date  
-- Functions: Register Sales, Calculate Total, Reduce Stock  
+  
+#### Fields  
+- **EpId**: Unique ID For Each Export/Sale Transaction  
+- **PdId**: Product Being Sold  
+- **PdPrice**: Selling Price Per Unit  
+- **PdQuantity**: Quantity Sold  
+- **PdTotalPrice**: Total Sale Value (Price × Quantity)  
+- **UserId**: Staff Member Who Processed The Sale  
+- **Date**: Date And Time Of Sale  
+  
+#### Functions  
+- **Register Sale**: Logs Sale And Updates Stock  
+- **Calculate Total**: Computes Sale Amount  
+- **Reduce Stock**: Decreases Inventory Count  
+- **View Sales History**: Displays Past Sales  
+- **Check Stock Before Sale**: Validates Stock Availability  
   
 ### 7. Report  
-- Fields: ReportId, UserId, RpName, RpInfo  
-- Functions: Report Generation, Storage, Display  
+  
+#### Fields  
+- **ReportId**: Unique Identifier For Each Report  
+- **UserId**: Creator Or Owner Of The Report  
+- **RpName**: Title Of The Report  
+- **RpInfo**: Detailed Content Or Summary  
+  
+#### Functions  
+- **Generate Report**: Compiles Data For Reporting  
+- **Store Report**: Saves Report For Later Viewing  
+- **Display Report**: Visualizes Report As Tables/Charts  
+- **Export Report**: Downloadable In PDF, Excel  
+- **Share Report**: Grants Access To Others  
   
 ---
   
