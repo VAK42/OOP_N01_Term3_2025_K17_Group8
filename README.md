@@ -209,9 +209,9 @@ _Custom User Reports_
 │               │   ├── form.html
 │               │   └── list.html
 │               └── user
-│                   ├── form.html
-│                   ├── list.html
-│                   └── index.html
+│               |   ├── form.html
+│               |   └── list.html
+│               └── index.html
 ├── test/java/com/vak/oop/controller
 │   ├── CategoryControllerTest.java
 │   ├── ReportControllerTest.java
