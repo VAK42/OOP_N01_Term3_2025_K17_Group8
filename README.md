@@ -337,7 +337,49 @@ _Custom User Reports_
 ## **VIII - Diagrams**  
 - Class Diagram  
   <img src="img/ERD.png" alt="ERD"/>  
-- Behavioural Diagram  
+- Behavioural Diagram
+
+```mermaid
+flowchart TD
+    Start([Start])
+
+    Start --> Login{User Logs In?}
+    Login -- Yes --> VerifyCredentials[Verify Credentials]
+    VerifyCredentials --> CreateToken[Create Token]
+    CreateToken --> GoToDashboard[Go To Dashboard]
+    Login -- No --> End([End])
+
+    GoToDashboard --> ViewProducts[View Product List]
+    GoToDashboard --> ManageCategories[Add/Edit/Delete Category]
+    GoToDashboard --> AddProduct[Add New Product]
+    GoToDashboard --> ImportFlow{Import Product?}
+    GoToDashboard --> ExportFlow{Export Product?}
+    GoToDashboard --> CreateReport[Create Report]
+
+    ImportFlow -- Yes --> SelectImportProduct[Select Product To Import]
+    SelectImportProduct --> EnterImportDetails[Enter Price & Quantity]
+    EnterImportDetails --> SaveImport[Save Import To Database]
+    SaveImport --> IncreaseStock[Increase Product Stock]
+
+    ExportFlow -- Yes --> SelectExportProduct[Select Product To Export]
+    SelectExportProduct --> EnterExportDetails[Enter Price & Quantity]
+    EnterExportDetails --> CheckStock{Enough Stock Available?}
+    CheckStock -- Yes --> SaveExport[Save Export To Database]
+    SaveExport --> DecreaseStock[Decrease Product Stock]
+    CheckStock -- No --> ShowError[Show Error Message]
+
+    CreateReport --> SubmitReport[Submit Report To Database]
+
+    subgraph EndPoints
+        ViewProducts --> End
+        ManageCategories --> End
+        AddProduct --> End
+        IncreaseStock --> End
+        DecreaseStock --> End
+        ShowError --> End
+        SubmitReport --> End
+    end
+```
   
 ---
   
