@@ -335,7 +335,9 @@ _Custom User Reports_
 ---
   
 ## **VIII - Diagrams**  
-- Coming Soon  
+- Class Diagram  
+  <img src="img/ERD.png" alt="ERD"/>  
+- Behavioural Diagram  
   
 ---
   
