@@ -400,8 +400,8 @@ erDiagram
     USER ||--o{ REPORT : writes
 
     CATEGORY ||--o{ PRODUCT : contains
-    PRODUCT ||--o{ IMPORT : is_imported_in
-    PRODUCT ||--o{ EXPORT : is_exported_in
+    PRODUCT ||--o{ IMPORT : isImportedIn
+    PRODUCT ||--o{ EXPORT : isExportedIn
 ```
   
 - Behavioural Diagram  
