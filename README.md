@@ -335,8 +335,9 @@ _Custom User Reports_
 ---
   
 ## **VIII - Diagrams**  
-- Class Diagram
-
+- Class Diagram  
+  <img src="/img/ERD.png" alt="ERD"/>  
+  
 ```mermaid
 erDiagram
     USER {
