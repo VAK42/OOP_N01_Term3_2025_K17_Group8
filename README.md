@@ -34,7 +34,7 @@ _Manages Authorization_
 | username | String | Username                       |
 | password | String | Password                       |
 | email    | String | Contact Email                  |
-| role     | String | User Role (admin/user)         |
+| role     | String | User Role                      |
   
 ---
   
@@ -43,7 +43,7 @@ _Handles User Sessions_
   
 | Field  | Type   | Description                          |
 |--------|--------|--------------------------------------|
-| userId | UUID   | Linked To User (Foreign Key)         |
+| userId | UUID   | Linked To User - FK                  |
 | token  | String | Unique Session Token                 |
 | date   | Date   | Time Of Token Creation               |
   
@@ -67,9 +67,9 @@ _Represents Store Products_
 | pdId        | UUID     | Unique Product ID                    |
 | pdName      | String   | Product Name                         |
 | pdPrice     | Decimal  | Unit Price Of Product                |
-| categoryId  | UUID     | Linked Category (Foreign Key)        |
+| categoryId  | UUID     | Linked Category - FK                 |
 | pdInfo      | Text     | Product Description                  |
-| pdQuantity  | Integer  | Quantity In Stock (Default: 0)       |
+| pdQuantity  | Integer  | Quantity In Stock                    |
   
 ---
   
@@ -79,11 +79,11 @@ _Tracks Incoming Inventory_
 | Field      | Type     | Description                                |
 |------------|----------|--------------------------------------------|
 | ipId       | UUID     | Unique Import Record ID                    |
-| pdId       | UUID     | Imported Product ID (Foreign Key)          |
+| pdId       | UUID     | Imported Product ID - FK                   |
 | pdPrice    | Decimal  | Import Price Per Unit                      |
 | pdQuantity | Integer  | Quantity Imported                          |
-| userId     | UUID     | Handled By User (Foreign Key)              |
-| date       | DateTime | Date Of Import (Default: Current Timestamp)|
+| userId     | UUID     | Handled By User - FK                       |
+| date       | DateTime | Date Of Import                             |
   
 ---
   
@@ -93,12 +93,12 @@ _Tracks Outgoing Inventory_
 | Field        | Type     | Description                                         |
 |--------------|----------|-----------------------------------------------------|
 | epId         | UUID     | Unique Export Record ID                             |
-| pdId         | UUID     | Exported Product ID (Foreign Key)                   |
+| pdId         | UUID     | Exported Product ID - FK                            |
 | pdPrice      | Decimal  | Export Price Per Unit                               |
 | pdQuantity   | Integer  | Quantity Exported                                   |
 | pdTotalPrice | Decimal  | Auto-Calculated As pdPrice × pdQuantity             |
-| userId       | UUID     | Handled By User (Foreign Key)                       |
-| date         | DateTime | Date Of Export (Default: Current Timestamp)         |
+| userId       | UUID     | Handled By User - FK                                |
+| date         | DateTime | Date Of Export                                      |
   
 ---
   
@@ -108,7 +108,7 @@ _Custom User Reports_
 | Field     | Type   | Description                   |
 |-----------|--------|-------------------------------|
 | reportId  | UUID   | Unique Report ID              |
-| userId    | UUID   | Created By User (Foreign Key) |
+| userId    | UUID   | Created By User - FK          |
 | rpName    | String | Report Name                   |
 | rpInfo    | Text   | Report Content                |
   
