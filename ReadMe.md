@@ -4,7 +4,7 @@
 </p>
   
 ## **I - Introduction**  
-A CRUD-Based Web Application For Managing Store Inventory Operations - Developed With Spring Boot MVC + Thymeleaf + PostgreSQL. This System Enables Comprehensive Control Over Products, Categories, Imports, Exports, Users, Reports Through An Intuitive Dashboard.
+A CRUD-Based Web Application For Managing Store Inventory Operations - Developed With Spring Boot MVC + Thymeleaf + PostgreSQL/MySQL. This System Enables Comprehensive Control Over Products, Categories, Imports, Exports, Users, Reports Through An Intuitive Dashboard.
   
 ---
   
@@ -593,7 +593,7 @@ stateDiagram-v2
   
 ### Requirements  
 - JDK 24  
-- PostgreSQL  
+- PostgreSQL/MySQL  
 - IntelliJ IDEA  
   
 ### Installation  
