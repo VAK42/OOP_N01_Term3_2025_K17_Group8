@@ -586,6 +586,8 @@ stateDiagram-v2
   <img src="img/ReportTest.png" alt="Report Test"/>
 - User Test  
   <img src="img/UserTest.png" alt="User Test"/>  
+- General Test  
+  <img src="img/GeneralTest.png" alt="User Test"/>  
   
 ---
   
@@ -710,5 +712,4 @@ stateDiagram-v2
 
 ## XV - Future Implementation  
   
-- Excel + PDF Export
 - Authentication
