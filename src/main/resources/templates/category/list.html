@@ -17,6 +17,9 @@
         <input type="text" name="keyword" th:value="${keyword}" placeholder="Search" class="w-100">
       </form>
       <div>
+        <a th:href="@{/categories/excel}">
+          <button type="button" class="taskbar-btn"><span class="mdi--microsoft-excel"></span></button>
+        </a>
         <a th:href="@{/categories/new}">
           <button type="button" class="taskbar-btn"><span class="mdi--add-bold"></span></button>
         </a>
@@ -54,6 +57,7 @@
       <tr th:each="category : ${categories}">
         <td th:text="${category.name}">Name</td>
         <td>
+          <a th:href="@{/categories/pdf/{id}(id=${category.categoryId})}"><span class="mdi--pdf"></span></a>
           <a th:href="@{'/categories/edit/' + ${category.categoryId}}"><span class="mdi--edit"></span></a>
           <a th:href="@{'/categories/delete/' + ${category.categoryId}}"><span class="mdi--delete-outline"></span></a>
         </td>
