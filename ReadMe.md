@@ -707,3 +707,8 @@ stateDiagram-v2
   <img src="img/Report.png" alt="Report"/>
 - User  
   <img src="img/User.png" alt="User"/>  
+
+## XV - Future Implementation  
+  
+- Excel + PDF Export
+- Authentication
