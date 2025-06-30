@@ -639,14 +639,12 @@ stateDiagram-v2
       <td><b><i>Vu Anh Kiet</i></b></td>
       <td>
         Base Initialization<br>
-        Database<br>
         Dashboard<br>
         Category<br>
         Product
       </td>
       <td>
         <b>Base Initialization</b>: Set Up Project Structure & Environment & Configuration Files<br>
-        <b>Database</b>: Design Schema & ERD & Relationships<br>
         <b>Dashboard</b>: Create Summary Views<br>
         <b>Category</b>: Implement Category CRUD Operations & Link With Products<br>
         <b>Product</b>: Develop Full Product CRUD & Search Functionality & Inventory Logic
