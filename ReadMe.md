@@ -644,10 +644,10 @@ stateDiagram-v2
         Product
       </td>
       <td>
-        <b>Base Initialization</b>: Set Up Project Structure & Environment & Configuration Files<br>
-        <b>Dashboard</b>: Create Summary Views<br>
-        <b>Category</b>: Implement Category CRUD Operations & Link With Products<br>
-        <b>Product</b>: Develop Full Product CRUD & Search Functionality & Inventory Logic
+        <b>Base Initialization</b>: Initialize Project Structure & Configuration<br>
+        <b>Dashboard</b>: Integrate Summary Charts<br>
+        <b>Category</b>: Implement Category CRUD<br>
+        <b>Product</b>: Develop Product CRUD & Search & Filters
       </td>
     </tr>
     <tr>
@@ -657,8 +657,8 @@ stateDiagram-v2
         Report
       </td>
       <td>
-        <b>Export</b>: Register Sales Transactions & Calculate Totals & Reduce Inventory Stock<br>
-        <b>Report</b>: Generate & Display & Export Reports (PDF, Excel)
+        <b>Export</b>: Register Sales Transactions & Calculate Totals<br>
+        <b>Report</b>: Generate & Display & Export Reports
       </td>
     </tr>
     <tr>
@@ -668,8 +668,8 @@ stateDiagram-v2
         User
       </td>
       <td>
-        <b>Import</b>: Register Product Imports & Update Stock Levels & Maintain Import History<br>
-        <b>User</b>: Manage Authentication & Role Assignments
+        <b>Import</b>: Register Product Imports & Maintain Import History<br>
+        <b>User</b>: Manage User Information
       </td>
     </tr>
   </tbody>
@@ -708,6 +708,7 @@ stateDiagram-v2
 - User  
   <img src="img/User.png" alt="User"/>  
 
-## XV - Future Implementation  
+## XV - Future Integration  
   
 - Authentication
+- Confirmation Popup
